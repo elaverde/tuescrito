@@ -1,0 +1,35 @@
+{
+    "name": "amanda/elaverde",
+    "description": "Aplicativo de venta de plantillas de cartas y documentos para uso en la vida cotidiana.",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Edilson Laverde Molina",
+            "email": "edilsonlaverde_182@hotmail.com"
+        }
+    ],
+    "require": {
+        "slim/slim": "3.*",
+        "vlucas/phpdotenv": "^4.2",
+        "illuminate/database": "^5.5",
+        "illuminate/events": "^5.5",
+        "dompdf/dompdf": "^0.8.3",
+        "phpmailer/phpmailer": "^6.5",
+        "phpoffice/phpspreadsheet": "^1.8",
+        "byjg/migration": "4.2.*",
+        "illuminate/filesystem": "^5.5",
+        "robmorgan/phinx": "^0.11.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Migrations\\": "database/",
+            "App\\Models\\": "app/models/",
+            "App\\Controllers\\": "app/controllers/"
+        }
+    },
+    "scripts": {
+        "migrate": "vendor/bin/phinx migrate -c config-phinx.php",
+        "create-migration": "vendor/bin/phinx create $1 -c config-phinx.php"
+    }
+}

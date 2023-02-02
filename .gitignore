@@ -1,0 +1,20 @@
+# .gitignore for a Slim PHP project
+
+# Dependency directories
+/vendor
+
+# Compiled files
+/composer.lock
+/compiled.php
+
+# Environment-specific files
+/.env
+
+# Production environment-specific files
+/config.prod.php
+
+# Log files
+/logs
+
+# Cache files
+/cache
