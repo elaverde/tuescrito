@@ -20,7 +20,7 @@ $capsule->addConnection($container['settings']['db']);
 $capsule->setAsGlobal();
 $capsule->bootEloquent();
 
-$routes = array("users","admins");
+$routes = array("users","admins","categories","parameters","products","purchasedetail","shopping","texts");
 foreach ($routes as $route) {
     $file = __DIR__ . '/app/routes/' . $route . '/route.php';
     if (file_exists($file)) {
