@@ -9,7 +9,7 @@ class PurchaseDetailsController{
     public function store(Request $request, Response $response)
     {
         $data = $request->getParsedBody();
-        $purchaseDetail = PurchaseDetail::create([
+        $purchaseDetail = PurchaseDetails::create([
             'id_shopping' => $data['id_shopping'],
             'id_product' => $data['id_product'],
             'quantity' => $data['quantity'],
@@ -24,7 +24,7 @@ class PurchaseDetailsController{
     {
         $data = $request->getParsedBody();
         $id = $args['id'];
-        $purchasedetail = PurchaseDetail::find($id);
+        $purchasedetail = PurchaseDetails::find($id);
         $purchasedetail->update([
             'id_shopping' => $data['id_shopping'],
             'id_product' => $data['id_product'],
@@ -39,13 +39,13 @@ class PurchaseDetailsController{
     {
         $data = $request->getParsedBody();
         $id = $args['id'];
-        $purchasedetail = PurchaseDetail::find($id);
+        $purchasedetail = PurchaseDetails::find($id);
         $purchasedetail->delete();
         
     }
     public function index(Request $request, Response $response)
     {
-        $purchasedetail = PurchaseDetail::all();
+        $purchasedetail = PurchaseDetails::all();
         return $response->withJson($purchasedetail);
     }
 }

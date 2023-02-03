@@ -16,8 +16,8 @@ class Migration extends AbstractMigration
     {
         $this->capsule = new Capsule;
         $this->capsule->addConnection([
-            'driver' => DB_ADAPTER,
-            'host' => DB_HOST,
+            'driver' =>   DB_ADAPTER,
+            'host' =>     DB_HOST,
             'database' => DB_NAME,
             'username' => DB_USER,
             'password' => DB_PASS,

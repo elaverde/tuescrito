@@ -1,4 +1,5 @@
 <?php
+define('APP_NAME',   $_ENV['APP_NAME']);
 define('DB_ADAPTER', $_ENV['DB_DRIVER']);
 define('DB_HOST',    $_ENV['DB_HOST']);
 define('DB_NAME',    $_ENV['DB_DATABASE']);
@@ -9,9 +10,11 @@ define('DB_CHARSET', $_ENV['DB_CHARSET']);
 define('DB_COLLATE', $_ENV['DB_COLLATION']);
 define('DB_PREFIX',  $_ENV['DB_PREFIX']);
 
+
 $config = [
     'slim' => [
         'settings' => [
+            'app_name' => APP_NAME,
             'displayErrorDetails' => true,
             'addContentLengthHeader' => false,
             'db' => [
