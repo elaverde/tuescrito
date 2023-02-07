@@ -1,6 +1,6 @@
 @extends ('layouts.app')
 @section('module-name')
-Productos
+Administradores
 @endsection
 @section('module-form')
 <div class="row" id="app">
@@ -11,23 +11,33 @@ Productos
                 <!-- General Form Elements -->
                 <form @submit.prevent="submitForm" @keyup.enter="submitForm">
                     <div class="row mb-3">
-                        <label for="inputText" class="col-sm-3 col-form-label">Categoría</label>
-                        <div class="col-sm-9">
-                            <select required v-model='id_category' id="id_category" name="id_category" class="form-control">
-                                <option v-for="category in categories" :value="category.id">@{{category.name}}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <label for="inputText" class="col-sm-3 col-form-label">Nombre</label>
+                        <label for="inputText" class="col-sm-3 col-form-label">Nombres</label>
                         <div class="col-sm-9">
                             <input required v-model='name' id="name" name="name" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label for="inputPassword" class="col-sm-3 col-form-label">Descripción</label>
+                        <label for="inputText" class="col-sm-3 col-form-label">Apellidos</label>
                         <div class="col-sm-9">
-                            <textarea required v-model='description' id="description" name="description" class="form-control" style="height: 100px"></textarea>
+                            <input required v-model='last_name' id="last_name" name="last_name" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="inputText" class="col-sm-3 col-form-label">Email</label>
+                        <div class="col-sm-9">
+                            <input required v-model='email' id="email" name="email" type="email" class="form-control">
+                        </div>
+                    </div>
+                    <div v-if="!isEditing" class="row mb-3">
+                        <label for="inputText" class="col-sm-3 col-form-label">Contraseña</label>
+                        <div class="col-sm-9">
+                            <input required v-model='password' id="password" name="password" type="password" class="form-control">
+                        </div>
+                    </div>
+                    <div v-if="!isEditing" class="row mb-3">
+                        <label for="photo" class="col-sm-3 col-form-label">Foto</label>
+                        <div class="col-sm-9">
+                            <input id="photo" name="photo" type="file" class="form-control">
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -52,14 +62,14 @@ Productos
                     </div>
                 </div>
                 <div v-if="!loadingSpinner" class="news">
-                    <div v-for="product in products" class="post-item clearfix">
-                        <img src="{{ asset('assets/img/category.png') }}" alt="">
-                        <h4><a href="#">@{{product.name}}</a></h4>
-                        <p>@{{product.description}}</p>
+                    <div v-for="admin in admins" class="post-item clearfix">
+                        <img v-bind:src="admin.photo_url" alt="">
+                        <h4><a href="#">@{{admin.name}} @{{admin.last_name}}</a></h4>
+                        <p>@{{admin.email}}</p>
                         <!--ubicamos los bones al lado derecho -->
                         <div class="float-end">
-                            <button  @click="editProduct(product)"><i class="ri-edit-fill"></i></button>
-                            <button  @click="deleteProduct(product.id)"><i class="ri-delete-bin-6-fill"></i></button>
+                            <button  @click="editAdmin(admin)"><i class="ri-edit-fill"></i></button>
+                            <button  @click="deleteAdmin(admin.id)"><i class="ri-delete-bin-6-fill"></i></button>
                         </div>
                     </div>
                 </div>
@@ -69,5 +79,5 @@ Productos
 </div>
 @endsection
 @section('scripts')
-<script src="{{ asset('assets/js/app.product.js?v=rand()') }}"></script>
+<script src="{{ asset('assets/js/app.admin.js') }}?v={{ uniqid() }}"></script>
 @endsection

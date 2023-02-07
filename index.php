@@ -41,7 +41,7 @@ $container['asset'] = function() {
 };
 
 /* Cargando todas las rutas desde la carpeta de rutas. */
-$routes = array("users","admins","categories","parameters","products","purchasedetail","shopping","texts");
+$routes = array("users","admins","categories","parameters","products","purchasedetail","shopping","texts","product");
 foreach ($routes as $route) {
     $file = __DIR__ . '/app/routes/' . $route . '/route.php';
     if (file_exists($file)) {
@@ -50,13 +50,16 @@ foreach ($routes as $route) {
     }
 }
 $app->get('/', function ($request, $response, $args) use($blade) {
-    echo $blade->render('pages.login');
+    echo $blade->render('pages.app-login');
 });
 $app->get('/category', function ($request, $response, $args) use($blade) {
     echo $blade->render('pages.app-categories');
 });
 $app->get('/product', function ($request, $response, $args) use($blade) {
     echo $blade->render('pages.app-product');
+});
+$app->get('/admin', function ($request, $response, $args) use($blade) {
+    echo $blade->render('pages.app-admin');
 });
 /* Capturar cualquier excepción que pueda ocurrir en la aplicación. */
 try {

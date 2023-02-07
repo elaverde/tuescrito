@@ -23,8 +23,8 @@ class ProductController{
 
         
         $product = Product::create([
+            'id_category' => $data['id_category'],
             'name' => $data['name'],
-            'description' => $data['description'],
             'description' => $data['description'],
             'updated_at' => date('Y-m-d H:i:s'),
             'created_at' => date('Y-m-d H:i:s'),
@@ -49,6 +49,7 @@ class ProductController{
             return $response->withJson(['error' => 'Name already in use'], 400);
         }
         $product->update([
+            'id_category' => $data['id_category'],
             'name' => $data['name'],
             'description' => $data['description'],
             'updated_at' => date('Y-m-d H:i:s'),
@@ -69,6 +70,11 @@ class ProductController{
         if (!$product) {
             return $response->withJson(['error' => 'Product not found'], 404);
         }
+        $product->delete();
+        return $response->withJson([
+            'message' => 'Product deleted successfully',
+            'product' => $product
+        ]);
     }
     public function index(Request $request, Response $response)
     {

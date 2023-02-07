@@ -1,43 +1,75 @@
-app = new Vue({
+var app = new Vue({
     el: '#app',
     data: {
         id:'',
         name:'',
-        description:'',
-        id_category:'',
-        products:[],
-        categories:[],
+        last_name:'',
+        email:'',
+        password:'',
+        admins:[],
         isEditing: false,
         loadingIndicator: false,
         loadingSpinner: false
     },
     created: function () {
-        this.getCategories();
-        this.getProducts();
+        this.getAdmins();
     },
     methods: {
         clearInputs: function () {
             this.name = '';
-            this.description = '';
+            this.last_name = '';
+            this.email = '';
+            this.password = '';
+            this.getAdmins();
             this.isEditing = false;
-            this.getProducts();
         },
-        editProduct: function (data) {
+        editAdmin: function (data) {
             this.isEditing = true;
             this.id = data.id;
             this.name = data.name;
-            this.description = data.description;
-            this.id_category = data.id_category;
+            this.last_name = data.last_name;
+            this.email = data.email;
+            this.password = data.password;
         },
         submitForm: function () {
-            this.isEditing ? this.updateProduct() : this.storeProduct();
+            this.isEditing ? this.updateAdmin() : this.storeAdmin();
         },
-        storeProduct: function () {
+        storeAdmin: function () {
             this.loadingIndicator = true;
-            axios.post('./product', {
+
+            //creamos data para adjuntar la imagen
+            var data = new FormData();
+            data.append('name', this.name);
+            data.append('last_name', this.last_name);
+            data.append('email', this.email);
+            data.append('password', this.password);
+
+            const photoInput = document.querySelector('input[name="photo"]');
+
+            if (photoInput.files.length > 0) {
+                data.append('photo', photoInput.files[0]);
+            }else{
+                data.append('photo', 'no-photo.jpg');
+            }
+            
+            axios.post('./admin', data)
+            .then(response => {
+                this.loadingIndicator = false;
+                this.clearInputs();
+                helperResponseMessage(response);
+            })
+            .catch(function (error)  {
+                this.loadingIndicator = false;
+                this.clearInputs();
+                helperResponseMessage(error.response);
+            });
+        },
+        updateAdmin: function () {
+            this.loadingIndicator = true;
+            axios.put(`./admin/${this.id}`, {
                 name: this.name,
-                description: this.description,
-                id_category: this.id_category
+                last_name: this.last_name,
+                email: this.email
             })
             .then(response => {
                 this.loadingIndicator = false;
@@ -49,26 +81,9 @@ app = new Vue({
                 helperResponseMessage(error.response);
             });
         },
-        updateProduct: function () {
-            this.loadingIndicator = true;
-            axios.put(`./product/${this.id}`, {
-                name: this.name,
-                description: this.description,
-                id_category: this.id_category
-            })
-            .then(response => {
-                this.loadingIndicator = false;
-                this.clearInputs();
-                helperResponseMessage(response);
-            })
-            .catch(function (error)  {
-                this.loadingIndicator = false;
-                helperResponseMessage(error.response);
-            });
-        },
-        deleteProduct: function (id) {
+        deleteAdmin: function (id) {
             Swal.fire({
-                title: "Esta seguro?",
+                title: "¿Esta seguro?",
                 text: "No podras recuperar la información!",
                 icon: "warning",
                 buttons: true,
@@ -77,9 +92,9 @@ app = new Vue({
             .then((willDeleted) => {
                 if (willDeleted) {
                     this.loadingSpinner = true;
-                    axios.delete(`./product/${id}`)
+                    axios.delete(`./admin/${id}`)
                     .then(response => {
-                        this.getProducts();
+                        this.getAdmins();
                         helperResponseMessage(response);
                         this.loadingSpinner = false;
                     })
@@ -90,24 +105,15 @@ app = new Vue({
                 }
             });
         },
-        getProducts: function () {
+        getAdmins: function () {
             this.loadingSpinner = true;
-            axios.get('./products')
+            axios.get('./admins')
             .then(response => {
-                this.products = response.data.products;
+                this.admins = response.data.admins;
                 this.loadingSpinner = false;
             })
             .catch(function (error)  {
                 this.loadingSpinner = false;
-            });
-        },
-        getCategories: function () {
-            axios.get('./categories')
-            .then(response => {
-                this.categories = response.data.categories;
-                this.id_category = this.categories[0].id;
-            })
-            .catch(function (error)  {
             });
         }
     }

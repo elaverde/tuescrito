@@ -38,6 +38,7 @@ class CreateTableUsers extends Migration
             $table->string('last_name',50);
             $table->string('email',50)->unique();
             $table->string('password');
+            $table->string('photo');
             // Required for Eloquent's created_at and updated_at columns
             $table->timestamps();
         });

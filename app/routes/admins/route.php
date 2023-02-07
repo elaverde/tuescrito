@@ -24,7 +24,7 @@ return function (App $app) {
      * - email: Correo electrónico del administrador (requerido)
      * - password: Contraseña del administrador (requerido)
      */
-    $app->post('/admins', \App\Controllers\AdminController::class . ':store');
+    $app->post('/admin', \App\Controllers\AdminController::class . ':store');
     /**
      * Endpoint para actualizar un administrador administrador
      *
@@ -34,13 +34,18 @@ return function (App $app) {
      * - email: Correo electrónico del administrador (requerido)
      * - password: Contraseña del administrador (requerido)
      */
-    $app->put('/admins/{id}', \App\Controllers\AdminController::class . ':update');
+    $app->put('/admin/{id}', \App\Controllers\AdminController::class . ':update');
     /**
      * Endpoint para actualizar la contraseña de un administrador administrador
      *
      * Datos esperados:
      * - password: Contraseña del administrador (requerido)
      */
-    $app->put('/admins/{id}/password', \App\Controllers\AdminController::class . ':updatePassword');
+    $app->put('/admin/{id}/password', \App\Controllers\AdminController::class . ':updatePassword');
+    /**
+     * Endpoint para listar los administradores
+     */
+    $app->get('/admins', \App\Controllers\AdminController::class . ':index');
+
 
 };
