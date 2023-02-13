@@ -68,7 +68,7 @@ Clientes
                         <h4><a href="#">@{{client.name}} @{{client.last_name}}</a></h4>
                         <p>@{{client.email}}</p>
                         <p>
-                        <small class="text-muted">Creado @{{client.created_at}}</small>
+                        <small class="text-muted">Creado: @{{client.created_at}}</small>
                         </p>
                         <!--ubicamos los bones al lado derecho -->
                         <div class="float-end">

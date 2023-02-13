@@ -3,6 +3,8 @@
 # Dependency directories
 /vendor
 
+
+
 # Compiled files
 /composer.lock
 /compiled.php
