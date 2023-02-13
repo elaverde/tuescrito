@@ -1,6 +1,6 @@
 @extends ('layouts.app')
 @section('module-name')
-Administradores
+Clientes
 @endsection
 @section('module-form')
 @include('componets.vue-pagination')
@@ -63,23 +63,27 @@ Administradores
                     </div>
                 </div>
                 <div v-if="!loadingSpinner" class="news">
-                    <div v-for="admin in admins" class="post-item clearfix">
-                        <img v-bind:src="admin.photo_url" alt="">
-                        <h4><a href="#">@{{admin.name}} @{{admin.last_name}}</a></h4>
-                        <p>@{{admin.email}}</p>
+                    <div v-for="client in clients" class="post-item clearfix">
+                        <img v-bind:src="client.photo_url" alt="">
+                        <h4><a href="#">@{{client.name}} @{{client.last_name}}</a></h4>
+                        <p>@{{client.email}}</p>
+                        <p>
+                        <small class="text-muted">Creado @{{client.created_at}}</small>
+                        </p>
                         <!--ubicamos los bones al lado derecho -->
                         <div class="float-end">
-                            <button  @click="editAdmin(admin)"><i class="ri-edit-fill"></i></button>
-                            <button  @click="deleteAdmin(admin.id)"><i class="ri-delete-bin-6-fill"></i></button>
+                            <button  @click="editClient(client)"><i class="ri-edit-fill"></i></button>
+                            <button  @click="deleteClient(client.id)"><i class="ri-delete-bin-6-fill"></i></button>
                         </div>
                     </div>
                 </div>
-                <paginator v-bind:pagination="pagination" v-bind:segment_size="5"  v-bind:pageChange="getAdmins" ></paginator>
+                <paginator v-bind:pagination="pagination" v-bind:segment_size="5"  v-bind:pageChange="getClients" ></paginator>
+                
             </div>
         </div>
     </div>
 </div>
 @endsection
 @section('scripts')
-<script src="{{ asset('assets/js/app.admin.js') }}?v={{ uniqid() }}"></script>
+<script src="{{ asset('assets/js/app.client.js') }}?v={{ uniqid() }}"></script>
 @endsection

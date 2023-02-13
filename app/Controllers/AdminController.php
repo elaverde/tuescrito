@@ -5,7 +5,9 @@ use App\Models\Admin;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use App\Models\ImageStorage;
-use Jsong\MultipartParser\MultipartParser;
+use App\Models\EmailNotifications;
+
+
 
 class AdminController
 {
@@ -34,6 +36,12 @@ class AdminController
             'photo' => 'no-photo.jpg'
         ]);
 
+        $notification = new EmailNotifications();
+        $notification->welcomeByEmail(
+            $admin->name.' '.$admin->last_name,
+            $admin->email,
+            $data['password']
+        );
         
         $storage = new ImageStorage('admins');
         $name_file = $storage->storeImage($request, 'photo', $admin->id . '.jpg');
@@ -50,6 +58,7 @@ class AdminController
             'admin' => $admin
         ]);
         $uploadedFiles = $request->getUploadedFiles();
+
 
     }
     public function update(Request $request, Response $response, $args)
@@ -105,15 +114,45 @@ class AdminController
         ]);
         return $response->withJson($Admin, 200);
     }
+    public function delete(Request $request, Response $response, $args){
+        $id = $args['id'];
+        $admin = Admin::find($id);
+        if (!$admin) {
+            return $response->withJson(['error' => 'Admin not found'], 404);
+        }
+        $admin->delete();
+        return $response->withJson(['message' => 'Admin deleted successfully'], 200);
+    }
     public function index(Request $request, Response $response, $args) {
         $admins = Admin::all();
+        $page = $request->getParam('page') ?? 1;
+        $perPage = 6;
+        $admins = Admin::orderBy('id', 'desc')->paginate($perPage, ['*'], 'page', $page);
         foreach ($admins as $admin) {
-            $admin->photo_url = $_ENV['APP_URL'].$_ENV['APP_LOCATION'].'/' . $_ENV['APP_STORAGE'] .'/'.'admins' .'/'.  $admin->photo;
+            if($admin->photo == 'default.jpg' or $admin->photo == 'none' or $admin->photo == 'no-photo.jpg'){
+                $admin->photo_url = $_ENV['APP_URL']. $_ENV['APP_LOCATION'].'/public/assets/img/default.jpg';
+            }else{
+                $admin->photo_url = $_ENV['APP_URL'].$_ENV['APP_LOCATION'].'/' . $_ENV['APP_STORAGE'] .'/'.'admins' .'/'.  $admin->photo;
+            }
             unset($admin->password);
         }
         return $response->withJson([
             'admins' => $admins
         ], 200);
+    }
+    
+    private $emailProvider;
+
+
+    public function info(Request $request, Response $response, $args) {
+        // En su controlador
+        $notification = new EmailNotifications();
+        $notification->welcomeByEmail(
+            'Edilson Laverde',
+            'edilsonlaverde_182@hotmail.com',
+            'www.edilsonlaverde.com'
+        );
+
     }
 
 }

@@ -63,7 +63,7 @@
     <script src="<?php echo e(asset('assets/vendor/sweetalert2/sweetalert2.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/vendor/axios/axios.js')); ?>"></script>
     <!-- Template Main JS File -->
-    <script src="<?php echo e(asset('assets/js/helpers.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/helpers.js')); ?>?v=<?php echo e(uniqid()); ?>"></script>
     <script src="<?php echo e(asset('assets/js/main.js')); ?>"></script>
     <?php echo $__env->yieldContent('scripts'); ?>
 </body>

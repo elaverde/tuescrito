@@ -24,7 +24,7 @@ return function (App $app) {
      * - email: Correo electrónico del usuario (requerido)
      * - password: Contraseña del usuario (requerido)
      */
-    $app->post('/users', \App\Controllers\UserController::class . ':store');
+    $app->post('/user', \App\Controllers\UserController::class . ':store');
     /**
      * Endpoint para actualizar un usuario administrador
      *
@@ -34,13 +34,25 @@ return function (App $app) {
      * - email: Correo electrónico del usuario (requerido)
      * - password: Contraseña del usuario (requerido)
      */
-    $app->put('/users/{id}', \App\Controllers\UserController::class . ':update');
+    $app->put('/user/{id}', \App\Controllers\UserController::class . ':update');
+    /**
+     * Endpoint para eliminar usuario
+     * 
+     * Datos esperados:
+     * - id: id del usuario (requerido)
+     */
+    $app->delete('/user/{id}', \App\Controllers\UserController::class . ':delete');
+
     /**
      * Endpoint para actualizar la contraseña de un usuario administrador
      *
      * Datos esperados:
      * - password: Contraseña del usuario (requerido)
      */
-    $app->put('/users/{id}/password', \App\Controllers\UserController::class . ':updatePassword');
+    //$app->put('/user/{id}/password', \App\Controllers\UserController::class . ':updatePassword');
+    /**
+     * Endpoint para listar los usuarios
+     */
+    $app->get('/users', \App\Controllers\UserController::class . ':index');
 
 };

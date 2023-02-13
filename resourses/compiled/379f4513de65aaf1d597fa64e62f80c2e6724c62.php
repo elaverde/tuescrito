@@ -3,6 +3,7 @@
 Administradores
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('module-form'); ?>
+<?php echo $__env->make('componets.vue-pagination', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 <div class="row" id="app">
     <div class="col-lg-6">
         <div class="card">
@@ -73,6 +74,7 @@ Administradores
                         </div>
                     </div>
                 </div>
+                <paginator v-bind:pagination="pagination" v-bind:segment_size="5"  v-bind:pageChange="getAdmins" ></paginator>
             </div>
         </div>
     </div>

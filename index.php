@@ -24,7 +24,6 @@ $blade = new Blade(__DIR__ . '/resourses/views', __DIR__ . '/resourses/compiled'
  */
 require_once __DIR__ . '/app/helpers/asset_helper.php';
 
-
 /* Este es el código que se conecta a la base de datos. */
 require __DIR__ . '/config.php';
 $app = new \Slim\App($config['slim']);
@@ -39,7 +38,16 @@ $container = $app->getContainer();
 $container['asset'] = function() {
     return new AssetHelper;
 };
+/*
+$container[EmailProviderInterface::class] = function () {
+    return new GmailEmailProvider();
+};
 
+$container[EmailProvider::class] = function ($c) {
+    $config = $c->get('config');
+    return new $config['email_provider']();
+};
+*/
 /* Cargando todas las rutas desde la carpeta de rutas. */
 $routes = array("users","admins","categories","parameters","products","purchasedetail","shopping","texts","product");
 foreach ($routes as $route) {
@@ -60,6 +68,9 @@ $app->get('/product', function ($request, $response, $args) use($blade) {
 });
 $app->get('/admin', function ($request, $response, $args) use($blade) {
     echo $blade->render('pages.app-admin');
+});
+$app->get('/client', function ($request, $response, $args) use($blade) {
+    echo $blade->render('pages.app-user');
 });
 /* Capturar cualquier excepción que pueda ocurrir en la aplicación. */
 try {

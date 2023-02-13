@@ -41,11 +41,21 @@ return function (App $app) {
      * Datos esperados:
      * - password: Contraseña del administrador (requerido)
      */
+    
     $app->put('/admin/{id}/password', \App\Controllers\AdminController::class . ':updatePassword');
+     /**
+     * Endpoint para eliminar usuario
+     * 
+     * Datos esperados:
+     * - id: id del usuario (requerido)
+     */
+    $app->delete('/admin/{id}', \App\Controllers\AdminController::class . ':delete');
     /**
      * Endpoint para listar los administradores
      */
     $app->get('/admins', \App\Controllers\AdminController::class . ':index');
+
+    $app->get('/info', \App\Controllers\AdminController::class . ':info');
 
 
 };

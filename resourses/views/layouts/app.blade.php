@@ -63,7 +63,7 @@
     <script src="{{ asset('assets/vendor/sweetalert2/sweetalert2.js') }}"></script>
     <script src="{{ asset('assets/vendor/axios/axios.js') }}"></script>
     <!-- Template Main JS File -->
-    <script src="{{ asset('assets/js/helpers.js') }}"></script>
+    <script src="{{ asset('assets/js/helpers.js') }}?v={{ uniqid() }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
     @yield('scripts')
 </body>

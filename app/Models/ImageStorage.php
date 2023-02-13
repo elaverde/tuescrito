@@ -34,7 +34,11 @@ class ImageStorage
     {
         
         $uploadedFiles = $request->getUploadedFiles();
-        $photo = $uploadedFiles[$image_name];
+        //validamos $image_name
+        if (!isset($image_name)) {
+            return null;
+        }
+        $photo = @$uploadedFiles[$image_name];
         if (!isset($photo)) {
             return null;
         }
@@ -57,7 +61,12 @@ class ImageStorage
     public function deleteImage($file_name)
     {
         $target_file = $this->target_dir . $file_name;
+        
         if (file_exists($target_file)) {
+            //peguntamod si es diferente a default.jpg
+            if ($file_name != 'default.jpg') {
+                return true;
+            }
             unlink($target_file);
             return true;
         } else {

@@ -1,3 +1,4 @@
+
 var app = new Vue({
     el: '#app',
     data: {
@@ -6,18 +7,19 @@ var app = new Vue({
         last_name:'',
         email:'',
         password:'',
-        admins:[],
+        clients:[],
         pagination:{},
         isEditing: false,
         loadingIndicator: false,
-        loadingSpinner: false
-
+        loadingSpinner: false,
+        
     },
+   
     created: function () {
-        this.getAdmins();
+        this.getClients();
     },
     components: {
-        paginator
+       paginator
     },
     methods: {
         clearInputs: function () {
@@ -25,13 +27,14 @@ var app = new Vue({
             this.last_name = '';
             this.email = '';
             this.password = '';
-            this.getAdmins();
+            this.getClients();
             this.isEditing = false;
+            //validamos el input photo que exista si existe lo limpiamos
             if (document.getElementById('photo')) {
                 document.getElementById('photo').value = '';
             }
         },
-        editAdmin: function (data) {
+        editClient: function (data) {
             this.isEditing = true;
             this.id = data.id;
             this.name = data.name;
@@ -40,9 +43,9 @@ var app = new Vue({
             this.password = data.password;
         },
         submitForm: function () {
-            this.isEditing ? this.updateAdmin() : this.storeAdmin();
+            this.isEditing ? this.updateClient() : this.storeClient();
         },
-        storeAdmin: function () {
+        storeClient: function () {
             this.loadingIndicator = true;
 
             //creamos data para adjuntar la imagen
@@ -59,22 +62,24 @@ var app = new Vue({
             }else{
                 data.append('photo', 'no-photo.jpg');
             }
-            
-            axios.post('./admin', data)
+            let _this = this;
+            axios.post('./user', data)
             .then(response => {
                 this.loadingIndicator = false;
                 this.clearInputs();
                 helperResponseMessage(response);
             })
             .catch(function (error)  {
-                this.loadingIndicator = false;
-                this.clearInputs();
+                _this.loadingIndicator = false;
+                _this.clearInputs();
                 helperResponseMessage(error.response);
+                
             });
         },
-        updateAdmin: function () {
+        updateClient: function () {
             this.loadingIndicator = true;
-            axios.put(`./admin/${this.id}`, {
+            let _this = this;
+            axios.put(`./user/${this.id}`, {
                 name: this.name,
                 last_name: this.last_name,
                 email: this.email
@@ -85,11 +90,12 @@ var app = new Vue({
                 helperResponseMessage(response);
             })
             .catch(function (error)  {
-                this.loadingIndicator = false;
+                _this.loadingIndicator = false;
+                _this.clearInputs();
                 helperResponseMessage(error.response);
             });
         },
-        deleteAdmin: function (id) {
+        deleteClient: function (id) {
             Swal.fire({
                 title: "¿Esta seguro?",
                 text: "No podras recuperar la información!",
@@ -100,25 +106,28 @@ var app = new Vue({
             .then((willDeleted) => {
                 if (willDeleted) {
                     this.loadingSpinner = true;
-                    axios.delete(`./admin/${id}`)
+                    axios.delete(`./user/${id}`)
                     .then(response => {
-                        this.getAdmins();
+                        this.getClients();
+                        console.log(response);
                         helperResponseMessage(response);
                         this.loadingSpinner = false;
                     })
                     .catch(function (error)  {
-                        helperResponseMessage(error.response);
+                        
+                        helperResponseMessage(error);
                         this.loadingSpinner = false;
                     });
                 }
             });
         },
-        getAdmins: function () {
+        getClients: function (page=1) {
+            _this = this;
             this.loadingSpinner = true;
-            axios.get('./admins')
+            axios.get(`./users?page=${page}`)
             .then(response => {
-                let {data, ...pagination} = response.data.admins;
-                this.admins = data;
+                let { data, ...pagination } = response.data.users;
+                this.clients = data;
                 this.pagination = pagination;
                 this.loadingSpinner = false;
             })
