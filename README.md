@@ -10,11 +10,10 @@ El script anterior define dos acciones para ejecutar en Phinx.
 
 Al ejecutar cualquiera de estos comandos, Phinx seguirá las definiciones en el archivo `config-phinx.php` para actualizar o crear la base de datos.
 
-'''
+
 # Para ejecutar las migraciones existentes
 composer migrate
 
 # Para crear una nueva migración
 composer create-migration NombreDeTuMigracion
 
-'''
