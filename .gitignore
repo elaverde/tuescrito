@@ -4,8 +4,12 @@
 /vendor
 
 # template cache de blade
-/resourses/compiled
-/compiled
+/resourses/compiled/*
+
+# Images users upload
+
+
+
 # Compiled files
 /composer.lock
 /compiled.php
