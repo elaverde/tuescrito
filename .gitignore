@@ -8,7 +8,8 @@
 
 # Images users upload
 
-
+/storage/admins/*
+/storage/clients/*
 
 # Compiled files
 /composer.lock
