@@ -3,7 +3,8 @@
 # Dependency directories
 /vendor
 
-
+# template cache de blade
+/resourses/views/compiled
 
 # Compiled files
 /composer.lock

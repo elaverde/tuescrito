@@ -7,6 +7,8 @@ use Slim\Http\Response;
 use App\Models\ImageStorage;
 use Illuminate\Pagination\Paginator;
 use App\Models\EmailNotifications;
+
+
 class UserController
 {
     public function store(Request $request, Response $response)

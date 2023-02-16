@@ -34,16 +34,16 @@ class CreateTableTexts extends Migration
         $this->schema->create('texts', function (Illuminate\Database\Schema\Blueprint $table) {
             // Auto-increment id
             $table->increments('id');
-            $table->unsignedInteger('id_product');
-            $table->unsignedInteger('id_admin');
+            $table->unsignedInteger('product_id');
+            $table->unsignedInteger('admin_id');
             $table->text('title');
             $table->text('template');
             $table->text('description');
 
             // Required for Eloquent's created_at and updated_at columns
             $table->timestamps();
-            $table->foreign('id_product')->references('id')->on('product')->onDelete('cascade');
-            $table->foreign('id_admin')->references('id')->on('admins')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('product')->onDelete('cascade');
+            $table->foreign('admin_id')->references('id')->on('admins')->onDelete('cascade');
         });
     }
     public function down()

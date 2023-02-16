@@ -26,6 +26,7 @@
 
   <!-- Template Main CSS File -->
   <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/css/app.css?') }}v={{ uniqid() }}" rel="stylesheet">
 
 
 </head>
@@ -57,14 +58,14 @@
     <script src="{{ asset('assets/vendor/echarts/echarts.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/quill/quill.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/simple-datatables/simple-datatables.js') }}"></script>
-    <script src="{{ asset('assets/vendor/tinymce/tinymce.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/php-email-form/validate.js') }}"></script>
     <script src="{{ asset('assets/vendor/vue/vue.js') }}"></script>
     <script src="{{ asset('assets/vendor/sweetalert2/sweetalert2.js') }}"></script>
     <script src="{{ asset('assets/vendor/axios/axios.js') }}"></script>
     <!-- Template Main JS File -->
     <script src="{{ asset('assets/js/helpers.js') }}?v={{ uniqid() }}"></script>
-    <script src="{{ asset('assets/js/main.js') }}"></script>
+    <script src="{{ asset('assets/js/main.js') }}?v={{ uniqid() }}"></script>
+    
     @yield('scripts')
 </body>
 </html>

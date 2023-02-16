@@ -10,7 +10,7 @@ return function (App $app) {
      * Endpoint para crear una producto
      *
      * Datos esperados:
-     * - id_category: int id de la categoria (requerido)
+     * - category_id: int id de la categoria (requerido)
      * - name: string nombre del producto (requerido)
      * - description: string descripcion del producto (requerido)
      */
@@ -19,7 +19,7 @@ return function (App $app) {
      * Endpoint para actualizar un producto
      *
      * Datos esperados:
-     * - id_category: int id de la categoria (requerido)
+     * - category_id: int id de la categoria (requerido)
      * - name: string nombre del producto (requerido)
      * - description: string descripcion del producto (requerido)
      */

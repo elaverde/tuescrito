@@ -1,13 +1,13 @@
-@extends ('layouts.app')
-@section('module-name')
+
+<?php $__env->startSection('module-name'); ?>
 Categorias
-@endsection
-@section('module-form')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('module-form'); ?>
 <div class="row" id="app">
     <div class="col-lg-6">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">@yield('module-name')</h5>
+                <h5 class="card-title"><?php echo $__env->yieldContent('module-name'); ?></h5>
                 <!-- General Form Elements -->
                 <form @submit.prevent="submitForm" @keyup.enter="submitForm">
                     <div class="row mb-3">
@@ -37,7 +37,7 @@ Categorias
     <div class="col-lg-6">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Mis @yield('module-name')</h5>
+                <h5 class="card-title">Mis <?php echo $__env->yieldContent('module-name'); ?></h5>
                 <div v-if="loadingSpinner" class="d-flex justify-content-center">
                     <div class="spinner-border" role="status">
                         <span class="visually-hidden">Loading...</span>
@@ -45,9 +45,9 @@ Categorias
                 </div>
                 <div v-if="!loadingSpinner" class="news">
                     <div v-for="category in categories" class="post-item clearfix">
-                        <img src="{{ asset('assets/img/category.png') }}" alt="">
-                        <h4><a href="#">@{{category.name}}</a></h4>
-                        <p>@{{category.description}}</p>
+                        <img src="<?php echo e(asset('assets/img/category.png')); ?>" alt="">
+                        <h4><a href="#">{{category.name}}</a></h4>
+                        <p>{{category.description}}</p>
                         <!--ubicamos los bones al lado derecho -->
                         <div class="float-end">
                             <button  @click="editCategory(category)"><i class="ri-edit-fill"></i></button>
@@ -59,7 +59,8 @@ Categorias
         </div>
     </div>
 </div>
-@endsection
-@section('scripts')
-<script src="{{ asset('assets/js/app.categories.js?v=rand()') }}"></script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('scripts'); ?>
+<script src="<?php echo e(asset('assets/js/app.categories.js?v=rand()')); ?>"></script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

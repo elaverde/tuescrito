@@ -98,7 +98,7 @@ var app = new Vue({
         deleteClient: function (id) {
             Swal.fire({
                 title: "¿Esta seguro?",
-                text: "No podras recuperar la información!",
+                text: "¡No podras recuperar la información!",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,

@@ -72,6 +72,9 @@ $app->get('/admin', function ($request, $response, $args) use($blade) {
 $app->get('/client', function ($request, $response, $args) use($blade) {
     echo $blade->render('pages.app-user');
 });
+$app->get('/text', function ($request, $response, $args) use($blade) {
+    echo $blade->render('pages.app-text');
+});
 /* Capturar cualquier excepción que pueda ocurrir en la aplicación. */
 try {
     $app->run();

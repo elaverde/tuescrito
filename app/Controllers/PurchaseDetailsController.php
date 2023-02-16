@@ -10,8 +10,8 @@ class PurchaseDetailsController{
     {
         $data = $request->getParsedBody();
         $purchaseDetail = PurchaseDetails::create([
-            'id_shopping' => $data['id_shopping'],
-            'id_product' => $data['id_product'],
+            'shopping_id' => $data['shopping_id'],
+            'product_id' => $data['product_id'],
             'quantity' => $data['quantity'],
             'price' => $data['price'],
             'description' => $data['description'],
@@ -26,8 +26,8 @@ class PurchaseDetailsController{
         $id = $args['id'];
         $purchasedetail = PurchaseDetails::find($id);
         $purchasedetail->update([
-            'id_shopping' => $data['id_shopping'],
-            'id_product' => $data['id_product'],
+            'shopping_id' => $data['shopping_id'],
+            'product_id' => $data['product_id'],
             'quantity' => $data['quantity'],
             'price' => $data['price'],
             'description' => $data['description'],

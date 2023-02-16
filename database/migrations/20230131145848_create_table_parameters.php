@@ -34,12 +34,12 @@ class CreateTableParameters extends Migration
         $this->schema->create('parameters', function (Illuminate\Database\Schema\Blueprint $table) {
             // Auto-increment id
             $table->increments('id');
-            $table->unsignedInteger('id_texts');
+            $table->unsignedInteger('texts_id');
             $table->string('label',50);
-            $table->string('simbol_remplace',50);
+            $table->string('key',50);
             // Required for Eloquent's created_at and updated_at columns
             $table->timestamps();
-            $table->foreign('id_texts')->references('id')->on('id')->on('texts')->onDelete('cascade');
+            $table->foreign('texts_id')->references('id')->on('id')->on('texts')->onDelete('cascade');
 
         });
     }

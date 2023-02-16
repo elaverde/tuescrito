@@ -10,7 +10,7 @@ return function (App $app) {
      * Endpoint para crear un parametro
      *
      * Datos esperados:
-     * - id_text: integer id del texto plantilla (requerido)
+     * - text_id: integer id del texto plantilla (requerido)
      * - label: string nombre del parametro que se le muesta al cliente (requerido)
      * - simbol_remplace: string simbolo que se remplaza en el texto plantilla (requerido)
      */
@@ -19,7 +19,7 @@ return function (App $app) {
      * Endpoint para actualizar un parametro
      *
      * Datos esperados:
-     * - id_text: integer id del texto plantilla (requerido)
+     * - text_id: integer id del texto plantilla (requerido)
      * - label: string nombre del parametro que se le muesta al cliente (requerido)
      * - simbol_remplace: string simbolo que se remplaza en el texto plantilla (requerido)
      */

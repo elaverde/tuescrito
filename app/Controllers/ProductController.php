@@ -23,7 +23,7 @@ class ProductController{
 
         
         $product = Product::create([
-            'id_category' => $data['id_category'],
+            'category_id' => $data['category_id'],
             'name' => $data['name'],
             'description' => $data['description'],
             'updated_at' => date('Y-m-d H:i:s'),
@@ -49,7 +49,7 @@ class ProductController{
             return $response->withJson(['error' => 'Name already in use'], 400);
         }
         $product->update([
-            'id_category' => $data['id_category'],
+            'category_id' => $data['category_id'],
             'name' => $data['name'],
             'description' => $data['description'],
             'updated_at' => date('Y-m-d H:i:s'),

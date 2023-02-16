@@ -34,14 +34,14 @@ class CreateTablePurchaseDetail extends Migration
         $this->schema->create('purchasedetail', function (Illuminate\Database\Schema\Blueprint $table) {
             // Auto-increment id
             $table->increments('id');
-            $table->unsignedInteger('id_shopping');
-            $table->unsignedInteger('id_product');
+            $table->unsignedInteger('shopping_id');
+            $table->unsignedInteger('product_id');
             $table->integer('quantity');
             $table->float('price');
             // Required for Eloquent's created_at and updated_at columns
             $table->timestamps();
-            $table->foreign('id_shopping')->references('id')->on('shopping')->onDelete('cascade');
-            $table->foreign('id_product')->references('id')->on('product')->onDelete('cascade');
+            $table->foreign('shopping_id')->references('id')->on('shopping')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('product')->onDelete('cascade');
         });
     }
     public function down()

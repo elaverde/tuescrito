@@ -34,12 +34,12 @@ class CreateTableProduct extends Migration
         $this->schema->create('product', function (Illuminate\Database\Schema\Blueprint $table) {
             // Auto-increment id
             $table->increments('id');
-            $table->unsignedInteger('id_category');
+            $table->unsignedInteger('category_id');
             $table->string('name',50);
             $table->text('description');
             // Required for Eloquent's created_at and updated_at columns
             $table->timestamps();
-            $table->foreign('id_category')->references('id')->on('categories');
+            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
     public function down()

@@ -6,7 +6,7 @@
       </li>
       <template v-for="page in pages()">
         <li class="page-item" v-if="Math.abs(pagination.current_page - page) < segment_size">
-          <a class="page-link" href="#" @click.prevent="goToPage(page,pagechange)" :class="{ 'active': pagination.current_page === page }">@{{ page }}</a>
+          <a class="page-link" href="#" @click.prevent="goToPage(page,pagechange)" :class="{ 'active': pagination.current_page === page }">{{ page }}</a>
         </li>
       </template>
       <li class="page-item" v-if="pagination.next_page_url">

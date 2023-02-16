@@ -1,20 +1,20 @@
-@extends ('layouts.app')
-@section('module-name')
+
+<?php $__env->startSection('module-name'); ?>
 Productos
-@endsection
-@section('module-form')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('module-form'); ?>
 <div class="row" id="app">
     <div class="col-lg-6">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">@yield('module-name')</h5>
+                <h5 class="card-title"><?php echo $__env->yieldContent('module-name'); ?></h5>
                 <!-- General Form Elements -->
                 <form @submit.prevent="submitForm" @keyup.enter="submitForm">
                     <div class="row mb-3">
                         <label for="inputText" class="col-sm-3 col-form-label">Categoría</label>
                         <div class="col-sm-9">
                             <select required v-model='category_id' id="category_id" name="category_id" class="form-control">
-                                <option v-for="category in categories" :value="category.id">@{{category.name}}</option>
+                                <option v-for="category in categories" :value="category.id">{{category.name}}</option>
                             </select>
                         </div>
                     </div>
@@ -45,7 +45,7 @@ Productos
     <div class="col-lg-6">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Mis @yield('module-name')</h5>
+                <h5 class="card-title">Mis <?php echo $__env->yieldContent('module-name'); ?></h5>
                 <div v-if="loadingSpinner" class="d-flex justify-content-center">
                     <div class="spinner-border" role="status">
                         <span class="visually-hidden">Loading...</span>
@@ -53,9 +53,9 @@ Productos
                 </div>
                 <div v-if="!loadingSpinner" class="news">
                     <div v-for="product in products" class="post-item clearfix">
-                        <img src="{{ asset('assets/img/product.png') }}" alt="">
-                        <h4><a href="#">@{{product.name}}</a></h4>
-                        <p>@{{product.description}}</p>
+                        <img src="<?php echo e(asset('assets/img/product.png')); ?>" alt="">
+                        <h4><a href="#">{{product.name}}</a></h4>
+                        <p>{{product.description}}</p>
                         <!--ubicamos los bones al lado derecho -->
                         <div class="float-end">
                             <button  @click="editProduct(product)"><i class="ri-edit-fill"></i></button>
@@ -67,7 +67,8 @@ Productos
         </div>
     </div>
 </div>
-@endsection
-@section('scripts')
-<script src="{{ asset('assets/js/app.product.js') }}?v={{ uniqid() }}"></script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('scripts'); ?>
+<script src="<?php echo e(asset('assets/js/app.product.js')); ?>?v=<?php echo e(uniqid()); ?>"></script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

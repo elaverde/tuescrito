@@ -62,8 +62,8 @@ app = new Vue({
         },
         deleteCategory: function (id) {
             Swal.fire({
-                title: "Esta seguro?",
-                text: "No podras recuperar la información!",
+                title: "¿Esta seguro?",
+                text: "¡No podras recuperar la información!",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,

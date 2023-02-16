@@ -34,11 +34,11 @@ class CreateTableShopping extends Migration
         $this->schema->create('shopping', function (Illuminate\Database\Schema\Blueprint $table) {
             // Auto-increment id
             $table->increments('id');
-            $table->unsignedInteger('id_user');
+            $table->unsignedInteger('user_id');
             $table->float('price');  
             // Required for Eloquent's created_at and updated_at columns
             $table->timestamps();
-            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
     public function down()

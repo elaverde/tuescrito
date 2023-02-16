@@ -10,7 +10,7 @@ return function (App $app) {
      * Endpoint para crear una compra
      *
      * Datos esperados:
-     * - id_user: integer id del usuario (requerido)
+     * - user_id: integer id del usuario (requerido)
      * - price: float precio total de la compra (requerido)
      */
     $app->post('/shoppings', 'App\Controllers\ShoppingController:store');
@@ -18,7 +18,7 @@ return function (App $app) {
      * Endpoint para actualizar una compra
      *
      * Datos esperados:
-     * - id_user: integer id del usuario (requerido)
+     * - user_id: integer id del usuario (requerido)
      * - price: float precio total de la compra (requerido)
      */
     $app->put('/shoppings/{id}', 'App\Controllers\ShoppingController:update');

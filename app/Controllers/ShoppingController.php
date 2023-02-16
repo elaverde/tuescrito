@@ -10,7 +10,7 @@ class ShoppingController{
     {
         $data = $request->getParsedBody();
         $shopping = Shopping::create([
-            'id_user' => $data['id_user'],
+            'user_id' => $data['user_id'],
             'price' => $data['price'],
             'updated_at' => date('Y-m-d H:i:s'),
             'created_at' => date('Y-m-d H:i:s'),
@@ -24,7 +24,7 @@ class ShoppingController{
         $id = $args['id'];
         $shopping = Shopping::find($id);
         $shopping->update([
-            'id_user' => $data['id_user'],
+            'user_id' => $data['user_id'],
             'price' => $data['price'],
             'updated_at' => date('Y-m-d H:i:s'),
         ]);

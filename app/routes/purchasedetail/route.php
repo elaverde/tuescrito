@@ -10,8 +10,8 @@ return function (App $app) {
      * Endpoint para crear detalle de la compra
      *
      * Datos esperados:
-     * - id_shopping: integer id de la compra (requerido)
-     * - id_product: integer id del producto (requerido)
+     * - shopping_id: integer id de la compra (requerido)
+     * - product_id: integer id del producto (requerido)
      * - quantity: integer cantidad del producto (requerido)
      * - price: float precio del producto (requerido)
      */
@@ -20,8 +20,8 @@ return function (App $app) {
      * Endpoint para actualizar detalle de la compra
      *
      * Datos esperados:
-     * - id_shopping: integer id de la compra (requerido)
-     * - id_product: integer id del producto (requerido)
+     * - shopping_id: integer id de la compra (requerido)
+     * - product_id: integer id del producto (requerido)
      * - quantity: integer cantidad del producto (requerido)
      * - price: float precio del producto (requerido)
      */

@@ -5,5 +5,9 @@ use Illuminate\Database\Eloquent\Model;
 class Texts extends Model
 {
     protected $table = 'texts';
-    protected $fillable = ['id','id_product','id_admin','title','template','description','updated_at','created_at'];
+    protected $fillable = ['id','product_id','admin_id','title','template','description','updated_at','created_at'];
+    public function parameters()
+    {
+        return $this->hasMany(Parameters::class);
+    }
 }

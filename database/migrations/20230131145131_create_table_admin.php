@@ -1,6 +1,7 @@
 <?php
 
 use \Migrations\Migration;
+use App\Models\Admin;
 
 class CreateTableAdmin extends Migration
 {
@@ -42,6 +43,16 @@ class CreateTableAdmin extends Migration
             // Required for Eloquent's created_at and updated_at columns
             $table->timestamps();
         });
+        Admin::create([
+            'name' => 'Edilson',
+            'last_name' => 'Laverde Molina',
+            'email' => 'admin',
+            'password' =>md5('admin'),
+            'photo' => 'none',
+            'updated_at' => date('Y-m-d H:i:s'),
+            'created_at' => date('Y-m-d H:i:s'),
+        ]);
+       
     }
     public function down()
     {
