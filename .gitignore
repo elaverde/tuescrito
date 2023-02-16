@@ -4,8 +4,8 @@
 /vendor
 
 # template cache de blade
-/resourses/views/compiled
-
+/resourses/compiled
+/compiled
 # Compiled files
 /composer.lock
 /compiled.php
