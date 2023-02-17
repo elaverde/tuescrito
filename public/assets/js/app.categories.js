@@ -30,7 +30,7 @@ app = new Vue({
         },
         storeCategory: function () {
             this.loadingIndicator = true;
-            axios.post('./category', {
+            axios.post(`${PATH_APP}/category`, {
                 name: this.name,
                 description: this.description
             })
@@ -46,7 +46,7 @@ app = new Vue({
         },
         updateCategory: function () {
             this.loadingIndicator = true;
-            axios.put(`./category/${this.id}`, {
+            axios.put(`${PATH_APP}/category/${this.id}`, {
                 name: this.name,
                 description: this.description
             })
@@ -71,7 +71,7 @@ app = new Vue({
             .then((willDeleted) => {
                 if (willDeleted) {
                     this.loadingSpinner = true;
-                    axios.delete(`./category/${id}`)
+                    axios.delete(`${PATH_APP}/category/${id}`)
                     .then(response => {
                         this.getCategories();
                         helperResponseMessage(response);
@@ -84,7 +84,7 @@ app = new Vue({
         },
         getCategories: function () {
             this.loadingSpinner = true;
-            axios.get('./categories')
+            axios.get(`${PATH_APP}/categories`)
             .then(response => {
                 this.categories = response.data.categories;
                 this.loadingSpinner = false;

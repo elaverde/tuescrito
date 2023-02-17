@@ -60,7 +60,7 @@ var app = new Vue({
                 data.append('photo', 'no-photo.jpg');
             }
             
-            axios.post('./admin', data)
+            axios.post(PATH_APP+'/admin', data)
             .then(response => {
                 this.loadingIndicator = false;
                 this.clearInputs();
@@ -74,7 +74,7 @@ var app = new Vue({
         },
         updateAdmin: function () {
             this.loadingIndicator = true;
-            axios.put(`./admin/${this.id}`, {
+            axios.put(`${PATH_APP}/admin/${this.id}`, {
                 name: this.name,
                 last_name: this.last_name,
                 email: this.email
@@ -100,7 +100,7 @@ var app = new Vue({
             .then((willDeleted) => {
                 if (willDeleted) {
                     this.loadingSpinner = true;
-                    axios.delete(`./admin/${id}`)
+                    axios.delete(`${PATH_APP}/admin/${id}`)
                     .then(response => {
                         this.getAdmins();
                         helperResponseMessage(response);
@@ -115,7 +115,7 @@ var app = new Vue({
         },
         getAdmins: function () {
             this.loadingSpinner = true;
-            axios.get('./admins')
+            axios.get(`${PATH_APP}/admins`)
             .then(response => {
                 let {data, ...pagination} = response.data.admins;
                 this.admins = data;

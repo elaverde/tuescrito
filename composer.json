@@ -21,19 +21,26 @@
         "illuminate/filesystem": "^5.5",
         "robmorgan/phinx": "^0.11.7",
         "jenssegers/blade": "^1.4",
-        "illuminate/pagination": "^5.5"
+        "illuminate/pagination": "^5.5",
+        "firebase/php-jwt": "^6.0"
     },
     "autoload": {
         "psr-4": {
             "Migrations\\": "database/",
-            "App\\Models\\": "app/models/",
+            "App\\Models\\": "app/Models/",
             "App\\Controllers\\": "app/controllers/",
             "App\\Interfaces\\": "app/Interfaces/",
-            "App\\Providers\\": "app/providers/"
+            "App\\Providers\\": "app/Providers/",
+            "App\\Middlewares\\": "app/Middlewares/"
         }
     },
     "scripts": {
         "migrate": "vendor/bin/phinx migrate -c config-phinx.php",
         "create-migration": "vendor/bin/phinx create $1 -c config-phinx.php"
+    },
+    "config": {
+        "allow-plugins": {
+            "kylekatarnls/update-helper": true
+        }
     }
 }

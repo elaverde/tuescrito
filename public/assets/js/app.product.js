@@ -34,7 +34,7 @@ app = new Vue({
         },
         storeProduct: function () {
             this.loadingIndicator = true;
-            axios.post('./product', {
+            axios.post(`${PATH_APP}/product`, {
                 name: this.name,
                 description: this.description,
                 id_category: this.id_category
@@ -51,7 +51,7 @@ app = new Vue({
         },
         updateProduct: function () {
             this.loadingIndicator = true;
-            axios.put(`./product/${this.id}`, {
+            axios.put(`${PATH_APP}/product/${this.id}`, {
                 name: this.name,
                 description: this.description,
                 id_category: this.id_category
@@ -77,7 +77,7 @@ app = new Vue({
             .then((willDeleted) => {
                 if (willDeleted) {
                     this.loadingSpinner = true;
-                    axios.delete(`./product/${id}`)
+                    axios.delete(`${PATH_APP}/product/${id}`)
                     .then(response => {
                         this.getProducts();
                         helperResponseMessage(response);
@@ -92,7 +92,7 @@ app = new Vue({
         },
         getProducts: function () {
             this.loadingSpinner = true;
-            axios.get('./products')
+            axios.get(`${PATH_APP}/products`)
             .then(response => {
                 this.products = response.data.products;
                 this.loadingSpinner = false;
@@ -102,7 +102,7 @@ app = new Vue({
             });
         },
         getCategories: function () {
-            axios.get('./categories')
+            axios.get(`${PATH_APP}/categories`)
             .then(response => {
                 this.categories = response.data.categories;
                 this.id_category = this.categories[0].id;

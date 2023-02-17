@@ -76,7 +76,7 @@ var app = new Vue({
             
         },
         getProducts: function () {
-            axios.get('./products')
+            axios.get(`${PATH_APP}/products`)
             .then(response => {
                 this.products =response.data.products;
             })
@@ -104,7 +104,7 @@ var app = new Vue({
         },
         storeText: function () {
             this.loadingIndicator = true;
-            axios.post('./texts', {
+            axios.post(`${PATH_APP}/texts`, {
                 title: this.title,
                 product_id: this.product_id,
                 description: this.description,
@@ -124,7 +124,7 @@ var app = new Vue({
         },
         updateText: function () {
             this.loadingIndicator = true;
-            axios.put(`./texts/${this.id}`, {
+            axios.put(`${PATH_APP}/texts/${this.id}`, {
                 title: this.title,
                 product_id: this.product_id,
                 description: this.description,
@@ -146,9 +146,9 @@ var app = new Vue({
             this.loadingSpinner = true;
             let url;
             if(this.product_id_filter == ""){
-                url = `./texts?search=${this.search}&page=${page}`;
+                url = `${PATH_APP}/texts?search=${this.search}&page=${page}`;
             }else{
-                url = `./texts?search=${this.search}&product_id_filter=${this.product_id_filter}&page=${page}`;
+                url = `${PATH_APP}/texts?search=${this.search}&product_id_filter=${this.product_id_filter}&page=${page}`;
             }
             axios.get(url)
             .then(response => {
@@ -172,7 +172,7 @@ var app = new Vue({
             .then((willDeleted) => {
                 if (willDeleted) {
                     this.loadingSpinner = true;
-                    axios.delete(`./texts/${id}`)
+                    axios.delete(`${PATH_APP}/texts/${id}`)
                     .then(response => {
                         this.getText();
                         helperResponseMessage(response);

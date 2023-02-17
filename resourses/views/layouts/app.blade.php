@@ -52,6 +52,9 @@
   </main><!-- End #main -->
     @include('componets.footer')
     <!-- Vendor JS Files -->
+    <script>
+        var PATH_APP = "<?= $_ENV['APP_URL']. $_ENV['APP_LOCATION'] ?>";
+    </script>
     <script src="{{ asset('assets/vendor/apexcharts/apexcharts.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/chart.js/chart.umd.js') }}"></script>

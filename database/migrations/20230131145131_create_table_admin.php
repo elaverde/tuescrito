@@ -43,11 +43,12 @@ class CreateTableAdmin extends Migration
             // Required for Eloquent's created_at and updated_at columns
             $table->timestamps();
         });
+        $password = password_hash('admin', PASSWORD_BCRYPT);
         Admin::create([
             'name' => 'Edilson',
             'last_name' => 'Laverde Molina',
             'email' => 'admin',
-            'password' =>md5('admin'),
+            'password' => $password,
             'photo' => 'none',
             'updated_at' => date('Y-m-d H:i:s'),
             'created_at' => date('Y-m-d H:i:s'),

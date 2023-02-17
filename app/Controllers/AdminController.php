@@ -25,12 +25,12 @@ class AdminController
                     'message' => 'A Admin with that email already exists.'
                 ]);
         }
-
+        $password = password_hash($data['password'], PASSWORD_BCRYPT);
         $admin = Admin::create([
             'name' => $data['name'],
             'last_name' => $data['last_name'],
             'email' => $data['email'],
-            'password' => md5($data['password']),
+            'password' => $password,
             'updated_at' => date('Y-m-d H:i:s'),
             'created_at' => date('Y-m-d H:i:s'),
             'photo' => 'no-photo.jpg'

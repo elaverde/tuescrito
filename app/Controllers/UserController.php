@@ -25,14 +25,15 @@ class UserController
                     'message' => 'A user with that email already exists.'
                 ]);
         }
+        $password = password_hash($data['password'], PASSWORD_BCRYPT);
         $admin = User::create([
-            'name' => $data['name'],
-            'last_name' => $data['last_name'],
-            'email' => $data['email'],
-            'password' => md5($data['password']),
+            'name' =>       $data['name'],
+            'last_name' =>  $data['last_name'],
+            'email' =>      $data['email'],
+            'password' =>   $password,
             'updated_at' => date('Y-m-d H:i:s'),
             'created_at' => date('Y-m-d H:i:s'),
-            'photo' => 'default.jpg'
+            'photo' =>      'default.jpg'
         ]);
 
         $notification = new EmailNotifications();
@@ -76,9 +77,9 @@ class UserController
             return $response->withJson(['error' => 'Email already in use'], 400);
         }
         $user->update([
-            'name' => $data['name'],
-            'last_name' => $data['last_name'],
-            'email' => $data['email'],
+            'name' =>       $data['name'],
+            'last_name' =>  $data['last_name'],
+            'email' =>      $data['email'],
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
         return $response->withJson($user, 200);

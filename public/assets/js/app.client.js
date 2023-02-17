@@ -63,7 +63,7 @@ var app = new Vue({
                 data.append('photo', 'no-photo.jpg');
             }
             let _this = this;
-            axios.post('./user', data)
+            axios.post(`${PATH_APP}/user`, data)
             .then(response => {
                 this.loadingIndicator = false;
                 this.clearInputs();
@@ -79,7 +79,7 @@ var app = new Vue({
         updateClient: function () {
             this.loadingIndicator = true;
             let _this = this;
-            axios.put(`./user/${this.id}`, {
+            axios.put(`${PATH_APP}/user/${this.id}`, {
                 name: this.name,
                 last_name: this.last_name,
                 email: this.email
@@ -106,7 +106,7 @@ var app = new Vue({
             .then((willDeleted) => {
                 if (willDeleted) {
                     this.loadingSpinner = true;
-                    axios.delete(`./user/${id}`)
+                    axios.delete(`${PATH_APP}/user/${id}`)
                     .then(response => {
                         this.getClients();
                         console.log(response);
@@ -124,7 +124,7 @@ var app = new Vue({
         getClients: function (page=1) {
             _this = this;
             this.loadingSpinner = true;
-            axios.get(`./users?page=${page}`)
+            axios.get(`${PATH_APP}/users?page=${page}`)
             .then(response => {
                 let { data, ...pagination } = response.data.users;
                 this.clients = data;

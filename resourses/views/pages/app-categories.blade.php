@@ -61,5 +61,5 @@ Categorias
 </div>
 @endsection
 @section('scripts')
-<script src="{{ asset('assets/js/app.categories.js?v=rand()') }}"></script>
+<script src="{{ asset('assets/js/app.categories.js') }}?v={{ uniqid() }}"></script>
 @endsection
