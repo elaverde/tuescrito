@@ -147,11 +147,20 @@ class AdminController
     public function info(Request $request, Response $response, $args) {
         // En su controlador
         $notification = new EmailNotifications();
-        $notification->welcomeByEmail(
+        $n= ($notification->welcomeByEmail(
             'Edilson Laverde',
-            'edilsonlaverde_182@hotmail.com',
+            'edilsonlaverde182@gmail.com',
             'www.edilsonlaverde.com'
-        );
+        ));
+        if ($n) {
+            return $response->withJson([
+                'message' => 'Email enviado correctamente'
+            ], 200);
+        }else{
+            return $response->withJson([
+                'message' => 'Error al enviar el email'
+            ], 400);
+        }
 
     }
 

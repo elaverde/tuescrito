@@ -29,10 +29,24 @@ class EmailNotifications
         $success = $this->sendEmail($email, 'Soporte', $html);
         return $success;
     }
+    public function RecoverPasswordByEmail(string $name, string $email, string $password)
+    {
+        $html = $this->renderRecoverPasswordTemplate($name, $email, $password);
+        $success = $this->sendEmail($email, 'Soporte', $html);
+        return $success;
+    }
 
     protected function renderWelcomeTemplate(string $name, string $email, string $password)
     {
         return $this->blade->render('emails.welcome', [
+            'name' => $name,
+            'email' => $email,
+            'password' => $password
+        ]);
+    }
+    protected function renderRecoverPasswordTemplate(string $name, string $email, string $password)
+    {
+        return $this->blade->render('emails.recover-password', [
             'name' => $name,
             'email' => $email,
             'password' => $password

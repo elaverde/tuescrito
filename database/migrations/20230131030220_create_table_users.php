@@ -1,7 +1,7 @@
 <?php
 
 use \Migrations\Migration;
-
+use App\Models\User;
 class CreateTableUsers extends Migration
 {
     /**
@@ -42,6 +42,17 @@ class CreateTableUsers extends Migration
             // Required for Eloquent's created_at and updated_at columns
             $table->timestamps();
         });
+        $password = password_hash('user', PASSWORD_BCRYPT);
+        User::create([
+            'name' => 'Edilson',
+            'last_name' => 'Laverde Molina',
+            'email' => 'user',
+            'password' => $password,
+            'photo' => 'none',
+            'updated_at' => date('Y-m-d H:i:s'),
+            'created_at' => date('Y-m-d H:i:s'),
+        ]);
+       
     }
     public function down()
     {

@@ -16,6 +16,14 @@ return function (App $app) {
      */
     $app->post('/login/admin', 'App\Controllers\AuthController:loginAdmin');
     /**
+     * Endpoint para recuperar contraseña
+     *
+     * Datos esperados:
+     * - email: Correo electrónico del administrador (requerido)
+     */
+    $app->post('/login/admin/recover', 'App\Controllers\AuthController:recoverPasswordAdmin');
+
+    /**
      * Endpoint para crear un nuevo administrador administrador
      *
      * Datos esperados:

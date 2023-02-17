@@ -3,14 +3,6 @@ session_start();
 require __DIR__ . '/vendor/autoload.php';
 date_default_timezone_set("America/Bogota");
 use Illuminate\Database\Capsule\Manager as Capsule;
-/*
-use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
-use Slim\Factory\AppFactory;
-use Slim\Routing\RouteCollectorProxy;
-use Slim\Views\PhpRenderer;
-*/
-
 use Jenssegers\Blade\Blade;
 
 
@@ -27,9 +19,6 @@ $blade = new Blade(__DIR__ . '/resourses/views', __DIR__ . '/resourses/compiled'
  * @return /público/css/estilo.css
  */
 use  App\Middlewares\SessionMiddleware;
-
-
-
 
 /* Este es el código que se conecta a la base de datos. */
 require __DIR__ . '/config.php';
@@ -66,6 +55,7 @@ foreach ($routes as $route) {
 $app->get('/admin/login', function ($request, $response, $args) use($blade) {
     echo $blade->render('pages.app-login', [
         'PATH_SESSION' => '../login/admin',
+        'PATH_RECOVER' => '../login/admin/recover',
         'PATH_HOME' => '../admin/home'
     ]);
 })->setName('login-admin');
@@ -73,28 +63,29 @@ $app->get('/admin/login', function ($request, $response, $args) use($blade) {
 $app->get('/user/login', function ($request, $response, $args) use($blade) {
     echo $blade->render('pages.app-login', [
         'PATH_SESSION' => '../login/user',
+        'PATH_RECOVER' => './login/user/recover',
         'PATH_HOME' => '../user/home'
     ]);
 })->setName('login-client');
 
 $app->group('/admin', function ()  use ($app,$container,$blade)  {
     $app->get('/home', function ($request, $response, $args) use($blade) {
-        echo $blade->render('pages.app-home');
+        echo $blade->render('pages.app-home',['path'=>"home"]);
     });
     $app->get('/category', function ($request, $response, $args) use($blade) {
-        echo $blade->render('pages.app-categories');
+        echo $blade->render('pages.app-categories',['path'=>"category"]);
     });
     $app->get('/product', function ($request, $response, $args) use($blade) {
-        echo $blade->render('pages.app-product');
+        echo $blade->render('pages.app-product',['path'=>"product"]);
     });
     $app->get('/admin', function ($request, $response, $args) use($blade) {
-        echo $blade->render('pages.app-admin');
+        echo $blade->render('pages.app-admin',['path'=>"text"]);
     });
     $app->get('/client', function ($request, $response, $args) use($blade) {
-        echo $blade->render('pages.app-user');
+        echo $blade->render('pages.app-user',['path'=>"client"]);
     });
     $app->get('/text', function ($request, $response, $args) use($blade) {
-        echo $blade->render('pages.app-text');
+        echo $blade->render('pages.app-text',['path'=>"admin"]);
     });
     $app->get('/logout', function ($request, $response, $args) use($blade) {
         if ($_SESSION['user_role']=='admin'){
@@ -106,7 +97,7 @@ $app->group('/admin', function ()  use ($app,$container,$blade)  {
         }
         
     });
-});
+})->add(new SessionMiddleware($container,['admin'],'login-admin'));
 
 /* Capturar cualquier excepción que pueda ocurrir en la aplicación. */
 try {
