@@ -97,10 +97,61 @@ class AdminController
         }
         return $response->withJson($data, 200);
     }
-    public function updatePassword(Request $request, Response $response, $args)
+    public function updateInfo (Request $request, Response $response, $args)
     {
         $data = $request->getParsedBody();
-        $id = $args['id'];
+        $id = $_SESSION['user_id'];
+        /**
+         * Validamos que el usuario exista
+         */
+        $admin = Admin::find($id);
+        if (!$admin) {
+            return $response->withJson(['error' => 'Admin not found'], 404);
+        }
+        /**
+         * Validamos que el correo electrónico no esté en uso por otro usuario
+         */
+        $existingAdmin = Admin::where('email', $data['email'])->first();
+        if ($existingAdmin && $existingAdmin->id != $id) {
+            return $response->withJson(['error' => 'Email already in use'], 400);
+        }
+        $admin->update([
+            'name' => $data['name'],
+            'last_name' => $data['last_name'],
+            'email' => $data['email'],
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
+        $_SESSION['user_name'] = $data['name'];
+        $_SESSION['user_last_name'] = $data['last_name'];
+        $_SESSION['user_email'] =  $data['email'];
+        return $response->withJson($data, 200);
+    }
+    public function updatePhotoInfo (Request $request, Response $response, $args)
+    {
+        $data = $request->getParsedBody();
+        $id = $_SESSION['user_id'];
+        $admin = Admin::find($id);
+        if (!$admin) {
+            return $response->withJson(['error' => 'User not found'], 404);
+        }
+        $storage = new ImageStorage('admins');
+        $name_file = $storage->storeImage($request, 'photo', $admin->id . '.jpg');
+        
+
+        if ($name_file !=null) {
+            // Actualizamos el nombre de la imagen en la base de datos
+            $_SESSION['user_photo'] = $name_file;
+            $admin->update([
+                'photo' => $name_file,
+                'updated_at' => date('Y-m-d H:i:s')
+            ]);
+        }
+        return $response->withJson($admin, 200);
+    }
+    public function updatePasswordInfo(Request $request, Response $response, $args)
+    {
+        $data = $request->getParsedBody();
+        $id = $_SESSION['user_id'];
         /**
          * Validamos que el usuario exista
          */
@@ -108,8 +159,16 @@ class AdminController
         if (!$Admin) {
             return $response->withJson(['error' => 'Admin not found'], 404);
         }
+        /**
+         * Validamos si el la contraseña antigua es correcta
+         */	
+        if (!password_verify($data['old_password'], $Admin->password)) {
+            return $response->withJson(['error' => 'Old password is incorrect'], 400);
+        }
+        $password = password_hash($data['new1_password'], PASSWORD_BCRYPT);
+
         $Admin->update([
-            'password' => md5($data['password']),
+            'password' => $password,
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
         return $response->withJson($Admin, 200);

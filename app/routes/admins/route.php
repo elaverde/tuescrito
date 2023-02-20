@@ -62,6 +62,29 @@ return function (App $app) {
      * Endpoint para listar los administradores
      */
     $app->get('/admins', \App\Controllers\AdminController::class . ':index');
+    /**
+     * Endpoint para actualizar la información del administrador logueado
+     * 
+     * Datos esperados:
+     * - name: Nombre del administrador (requerido)
+     * - last_name: Apellido del administrador (requerido)
+     * - email: Correo electrónico del administrador (requerido)
+     */
+    $app->put('/profile/admin/info', \App\Controllers\AdminController::class . ':updateInfo');
+    /**
+     * Endpoint para actualizar la contraseña del administrador logueado
+     * 
+     * Datos esperados:
+     * - password: Contraseña del administrador (requerido)
+     */
+    $app->put('/profile/admin/password', \App\Controllers\AdminController::class . ':updatePasswordInfo');
+    /**
+     * Endpoint para actualizar la foto del administrador logueado
+     * 
+     * Datos esperados:
+     * - photo: Foto del administrador (requerido)
+     */
+    $app->post('/profile/admin/photo', \App\Controllers\AdminController::class . ':updatePhotoInfo');
 
     $app->get('/info', \App\Controllers\AdminController::class . ':info');
 

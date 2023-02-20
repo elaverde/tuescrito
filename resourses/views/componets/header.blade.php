@@ -86,7 +86,7 @@
 
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                     <img src="{{ @profile_image($_SESSION['user_photo']) }}" alt="Profile" class="rounded-circle">
-                    <span class="d-none d-md-block dropdown-toggle ps-2">Edilson Laverde</span>
+                    <span class="d-none d-md-block dropdown-toggle ps-2"><?= $_SESSION['user_name']." ".$_SESSION['user_last_name'] ?></span>
                 </a><!-- End Profile Iamge Icon -->
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header">
@@ -97,7 +97,7 @@
                         <hr class="dropdown-divider">
                     </li>
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                        <a class="dropdown-item d-flex align-items-center" href="./profile">
                             <i class="bi bi-person"></i>
                             <span>Mis datos</span>
                         </a>

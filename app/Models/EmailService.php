@@ -1,6 +1,6 @@
 <?php
 namespace App\Models;
-use App\Providers\ZohooEmailProvider;
+use App\Providers\OutlookEmailProvider;
 use App\Interfaces\EmailProviderInterface;
 use Slim\Container as SlimContainer;
 
@@ -13,7 +13,7 @@ class EmailService
         $container = new SlimContainer();
         $this->container = $container;
         $this->container['emailProvider'] = function () {
-            return new ZohooEmailProvider();
+            return new OutlookEmailProvider();
         };
     }
 

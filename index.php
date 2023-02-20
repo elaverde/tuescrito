@@ -87,6 +87,14 @@ $app->group('/admin', function ()  use ($app,$container,$blade)  {
     $app->get('/text', function ($request, $response, $args) use($blade) {
         echo $blade->render('pages.app-text',['path'=>"admin"]);
     });
+    $app->get('/profile', function ($request, $response, $args) use($blade) {
+        echo $blade->render('pages.app-profile',[
+            'path'=>"admin",
+            'name' => $_SESSION['user_name'],
+            'last_name' =>  $_SESSION['user_last_name'],
+            'email' =>  $_SESSION['user_email']
+        ]);
+    });
     $app->get('/logout', function ($request, $response, $args) use($blade) {
         if ($_SESSION['user_role']=='admin'){
             session_destroy();

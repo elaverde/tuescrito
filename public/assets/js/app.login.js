@@ -59,7 +59,7 @@ var app = new Vue({
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: '¡El usuario o contraseña parecen estar mal!',
+                    text: '¡El usuario parece estar mal!',
                 });
                 _this.loadingIndicator = false;
             });

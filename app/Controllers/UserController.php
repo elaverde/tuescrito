@@ -26,7 +26,7 @@ class UserController
                 ]);
         }
         $password = password_hash($data['password'], PASSWORD_BCRYPT);
-        $admin = User::create([
+        $user = User::create([
             'name' =>       $data['name'],
             'last_name' =>  $data['last_name'],
             'email' =>      $data['email'],
@@ -38,24 +38,24 @@ class UserController
 
         $notification = new EmailNotifications();
         $notification->welcomeByEmail(
-            $admin->name.' '.$admin->last_name,
-            $admin->email,
+            $user->name.' '.$user->last_name,
+            $user->email,
             $data['password']
         );
 
         $storage = new ImageStorage('clients');
-        $name_file = $storage->storeImage($request, 'photo', $admin->id . '.jpg');
+        $name_file = $storage->storeImage($request, 'photo', $user->id . '.jpg');
         if ($name_file !=null) {
             // Actualizamos el nombre de la imagen en la base de datos
-            $admin->update([
+            $user->update([
                 'photo' => $name_file
             ]);
         }
         
         return $response->withStatus(201)
         ->withJson([
-            'message' => 'Admin created successfully',
-            'admin' => $admin
+            'message' => 'user created successfully',
+            'user' => $user
         ]);
     }
     public function update(Request $request, Response $response, $args)
@@ -99,6 +99,49 @@ class UserController
             'password' => md5($data['password']),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
+        return $response->withJson($user, 200);
+    }
+    public function updateProfile (Request $request, Response $response, $args)
+    {
+        $data = $request->getParsedBody();
+        $id = $_SESSION['user_id'];
+        /**
+         * Validamos que el usuario exista
+         */
+        $user = User::find($id);
+        if (!$user) {
+            return $response->withJson(['error' => 'User not found'], 404);
+        }
+        /**
+         * Validamos que el correo electrónico no esté en uso por otro usuario
+         */
+        $existinguser = User::where('email', $data['email'])->first();
+        if ($existinguser && $existinguser->id != $id) {
+            return $response->withJson(['error' => 'Email already in use'], 400);
+        }
+        $user->update([
+            'name' => $data['name'],
+            'last_name' => $data['last_name'],
+            'email' => $data['email'],
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
+        return $response->withJson($data, 200);
+    }
+    public function updatePhoto (Request $request, Response $response, $args)
+    {
+        $id = $_SESSION['user_id'];
+        $user = User::find($id);
+        if (!$user) {
+            return $response->withJson(['error' => 'User not found'], 404);
+        }
+        $storage = new ImageStorage('clients');
+        $name_file = $storage->storeImage($request, 'photo', $user->id . '.jpg');
+        if ($name_file !=null) {
+            // Actualizamos el nombre de la imagen en la base de datos
+            $user->update([
+                'photo' => $name_file
+            ]);
+        }
         return $response->withJson($user, 200);
     }
     public function delete(Request $request, Response $response, $args)
