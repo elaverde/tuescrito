@@ -37,6 +37,7 @@ class CreateTableProduct extends Migration
             $table->unsignedInteger('category_id');
             $table->string('name',50);
             $table->text('description');
+            $table->integer('price');
             // Required for Eloquent's created_at and updated_at columns
             $table->timestamps();
             $table->foreign('category_id')->references('id')->on('categories');

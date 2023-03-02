@@ -3,8 +3,10 @@ app = new Vue({
     data: {
         id:'',
         name:'',
+        price: '',
         description:'',
         id_category:'',
+        category_id:'',
         products:[],
         categories:[],
         isEditing: false,
@@ -19,6 +21,7 @@ app = new Vue({
         clearInputs: function () {
             this.name = '';
             this.description = '';
+            this.price = '';
             this.isEditing = false;
             this.getProducts();
         },
@@ -26,8 +29,9 @@ app = new Vue({
             this.isEditing = true;
             this.id = data.id;
             this.name = data.name;
+            this.price = data.price;
             this.description = data.description;
-            this.id_category = data.id_category;
+            this.category_id = data.category_id;
         },
         submitForm: function () {
             this.isEditing ? this.updateProduct() : this.storeProduct();
@@ -36,8 +40,9 @@ app = new Vue({
             this.loadingIndicator = true;
             axios.post(`${PATH_APP}/product`, {
                 name: this.name,
+                price: this.price,
                 description: this.description,
-                id_category: this.id_category
+                category_id: this.category_id
             })
             .then(response => {
                 this.loadingIndicator = false;
@@ -53,6 +58,7 @@ app = new Vue({
             this.loadingIndicator = true;
             axios.put(`${PATH_APP}/product/${this.id}`, {
                 name: this.name,
+                price: this.price,
                 description: this.description,
                 id_category: this.id_category
             })

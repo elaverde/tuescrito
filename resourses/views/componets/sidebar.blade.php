@@ -1,6 +1,5 @@
 <!-- ======= Sidebar ======= -->
 @php
-
     $menuItems = [
         [
             'url' => './category',
@@ -31,7 +30,6 @@
 @endphp
 <aside id="sidebar" class="sidebar">
     <ul class="sidebar-nav" id="sidebar-nav">
-        
         <li class="nav-heading">Mis módulos</li>
         <li class="nav-item">
             @foreach ($menuItems as $item)

@@ -35,6 +35,12 @@ class EmailNotifications
         $success = $this->sendEmail($email, 'Soporte', $html);
         return $success;
     }
+    public function ThankPurchaseByEmail(string $name, string $email)
+    {
+        $html = $this->renderThankPurchaseTemplate($name, $email);
+        $success = $this->sendEmail($email, 'Soporte', $html);
+        return $success;
+    }
 
     protected function renderWelcomeTemplate(string $name, string $email, string $password)
     {
@@ -50,6 +56,13 @@ class EmailNotifications
             'name' => $name,
             'email' => $email,
             'password' => $password
+        ]);
+    }
+    protected function renderThankPurchaseTemplate(string $name, string $email)
+    {
+        return $this->blade->render('emails.thank-purchase', [
+            'name' => $name,
+            'email' => $email
         ]);
     }
 

@@ -28,7 +28,8 @@
         "psr-4": {
             "Migrations\\": "database/",
             "App\\Models\\": "app/Models/",
-            "App\\Controllers\\": "app/controllers/",
+            "App\\Controllers\\api\\": "app/controllers/api/",
+            "App\\Controllers\\web\\": "app/controllers/web/",
             "App\\Interfaces\\": "app/Interfaces/",
             "App\\Providers\\": "app/Providers/",
             "App\\Middlewares\\": "app/Middlewares/"

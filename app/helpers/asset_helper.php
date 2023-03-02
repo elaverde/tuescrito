@@ -11,7 +11,11 @@ if (!function_exists('profile_image')) {
         if($photo == 'default.jpg' or $photo == 'none' or $photo == 'no-photo.jpg'){
             $photo_url = $_ENV['APP_URL']. $_ENV['APP_LOCATION'].'/public/assets/img/default.jpg';
         }else{
-            $photo_url = $_ENV['APP_URL'].$_ENV['APP_LOCATION'].'/' . $_ENV['APP_STORAGE'] .'/'.'admins' .'/'.  $photo;
+            if (isset($_SESSION['user_role']) and $_SESSION['user_role'] == 'user') {
+                $photo_url = $_ENV['APP_URL'].$_ENV['APP_LOCATION'].'/' . $_ENV['APP_STORAGE'] .'/'.'clients' .'/'.  $photo;
+            }else{
+                $photo_url = $_ENV['APP_URL'].$_ENV['APP_LOCATION'].'/' . $_ENV['APP_STORAGE'] .'/'.'admins' .'/'.  $photo;
+            }
         }
         return $photo_url;
     }   

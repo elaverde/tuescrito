@@ -18,7 +18,7 @@ $blade = new Blade(__DIR__ . '/resourses/views', __DIR__ . '/resourses/compiled'
  * 
  * @return /público/css/estilo.css
  */
-use  App\Middlewares\SessionMiddleware;
+
 
 /* Este es el código que se conecta a la base de datos. */
 require __DIR__ . '/config.php';
@@ -44,71 +44,32 @@ $container['profile_image'] = function ($c) {
     };
 };
 
-$routes = array("users","admins","categories","parameters","products","purchasedetail","shopping","texts","product");
-foreach ($routes as $route) {
-    $file = __DIR__ . '/app/routes/' . $route . '/route.php';
-    if (file_exists($file)) {
-        $routes = require $file;
-        $routes($app);
+
+
+function loadRoutesFromFolder($app, $folder) {
+    $files = scandir($folder);
+    foreach ($files as $file) {
+        if ($file === '.' || $file === '..') {
+            continue;
+        }
+        $path = $folder . '/' . $file;
+        if (is_file($path) && pathinfo($path, PATHINFO_EXTENSION) === 'php') {
+            $routes = require $path;
+            $routes($app);
+        } elseif (is_dir($path)) {
+            loadRoutesFromFolder($app, $path);
+        }
     }
 }
-$app->get('/admin/login', function ($request, $response, $args) use($blade) {
-    echo $blade->render('pages.app-login', [
-        'PATH_SESSION' => '../login/admin',
-        'PATH_RECOVER' => '../login/admin/recover',
-        'PATH_HOME' => '../admin/home'
-    ]);
-})->setName('login-admin');
-
-$app->get('/user/login', function ($request, $response, $args) use($blade) {
-    echo $blade->render('pages.app-login', [
-        'PATH_SESSION' => '../login/user',
-        'PATH_RECOVER' => './login/user/recover',
-        'PATH_HOME' => '../user/home'
-    ]);
-})->setName('login-client');
-
-$app->group('/admin', function ()  use ($app,$container,$blade)  {
-    $app->get('/home', function ($request, $response, $args) use($blade) {
-        echo $blade->render('pages.app-home',['path'=>"home"]);
-    });
-    $app->get('/category', function ($request, $response, $args) use($blade) {
-        echo $blade->render('pages.app-categories',['path'=>"category"]);
-    });
-    $app->get('/product', function ($request, $response, $args) use($blade) {
-        echo $blade->render('pages.app-product',['path'=>"product"]);
-    });
-    $app->get('/admin', function ($request, $response, $args) use($blade) {
-        echo $blade->render('pages.app-admin',['path'=>"text"]);
-    });
-    $app->get('/client', function ($request, $response, $args) use($blade) {
-        echo $blade->render('pages.app-user',['path'=>"client"]);
-    });
-    $app->get('/text', function ($request, $response, $args) use($blade) {
-        echo $blade->render('pages.app-text',['path'=>"admin"]);
-    });
-    $app->get('/profile', function ($request, $response, $args) use($blade) {
-        echo $blade->render('pages.app-profile',[
-            'path'=>"admin",
-            'name' => $_SESSION['user_name'],
-            'last_name' =>  $_SESSION['user_last_name'],
-            'email' =>  $_SESSION['user_email']
-        ]);
-    });
-    $app->get('/logout', function ($request, $response, $args) use($blade) {
-        if ($_SESSION['user_role']=='admin'){
-            session_destroy();
-            return $response->withRedirect($this->router->pathFor('login-admin'));
-        } else {
-            session_destroy();
-            return $response->withRedirect($this->router->pathFor('login-client'));
-        }
-        
-    });
-})->add(new SessionMiddleware($container,['admin'],'login-admin'));
-
+$folder = __DIR__ . '/app/routes';
+loadRoutesFromFolder($app, $folder);
 /* Capturar cualquier excepción que pueda ocurrir en la aplicación. */
 try {
+    //$peakMemoryUsage = memory_get_peak_usage();
+    //echo "Pico de memoria utilizada: " . $peakMemoryUsage . " bytes";
+    //$memoryUsage = memory_get_usage();
+    //echo "Memoria utilizada: " . $memoryUsage . " bytes";
+   
     $app->run();
 } catch (Exception $e) {
     die(json_encode(array("status" => "failed", "message" => "allowed" . $e)));

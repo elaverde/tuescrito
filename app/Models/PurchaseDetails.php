@@ -6,5 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 class PurchaseDetails extends Model
 {
     protected $table = 'purchasedetail';
-    protected $fillable = ['id','shopping_id','product_id','quantity','price','description','updated_at','created_at'];
+    protected $fillable = ['id','shopping_id','product_id','quantity','price','updated_at','created_at'];
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

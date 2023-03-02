@@ -7,4 +7,13 @@ class Shopping extends Model
 {
     protected $table = 'shopping';
     protected $fillable = ['id','user_id','price','updated_at','created_at'];
+    // Definir la relación "hasManyThrough" con el modelo Product
+    public function products() {
+        return $this->hasManyThrough(Product::class, PurchaseDetails::class);
+    }
+
+    // Definir la relación "hasMany" con el modelo PurchaseDetail
+    public function purchaseDetails() {
+        return $this->hasMany(PurchaseDetails::class);
+    }
 }
