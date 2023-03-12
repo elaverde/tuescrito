@@ -12,27 +12,27 @@ Administradores
                 <!-- General Form Elements -->
                 <form @submit.prevent="submitForm" @keyup.enter="submitForm">
                     <div class="row mb-3">
-                        <label for="inputText" class="col-sm-3 col-form-label">Nombres</label>
+                        <label for="name" class="col-sm-3 col-form-label">Nombres</label>
                         <div class="col-sm-9">
-                            <input required v-model='name' id="name" name="name" type="text" class="form-control">
+                            <input placeholder="Nombres" required v-model='name' id="name" name="name" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label for="inputText" class="col-sm-3 col-form-label">Apellidos</label>
+                        <label for="last_name" class="col-sm-3 col-form-label">Apellidos</label>
                         <div class="col-sm-9">
-                            <input required v-model='last_name' id="last_name" name="last_name" type="text" class="form-control">
+                            <input placeholder="Apellidos" required v-model='last_name' id="last_name" name="last_name" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label for="inputText" class="col-sm-3 col-form-label">Email</label>
+                        <label for="email" class="col-sm-3 col-form-label">Email</label>
                         <div class="col-sm-9">
-                            <input required v-model='email' id="email" name="email" type="email" class="form-control">
+                            <input placeholder="Email" required v-model='email' id="email" name="email" type="email" class="form-control">
                         </div>
                     </div>
                     <div v-if="!isEditing" class="row mb-3">
-                        <label for="inputText" class="col-sm-3 col-form-label">Contraseña</label>
+                        <label for="password" class="col-sm-3 col-form-label">Contraseña</label>
                         <div class="col-sm-9">
-                            <input required v-model='password' id="password" name="password" type="password" class="form-control">
+                            <input placeholder="Contraseña" required v-model='password' id="password" name="password" type="password" class="form-control">
                         </div>
                     </div>
                     <div v-if="!isEditing" class="row mb-3">
@@ -69,8 +69,8 @@ Administradores
                         <p>@{{admin.email}}</p>
                         <!--ubicamos los bones al lado derecho -->
                         <div class="float-end">
-                            <button  @click="editAdmin(admin)"><i class="ri-edit-fill"></i></button>
-                            <button  @click="deleteAdmin(admin.id)"><i class="ri-delete-bin-6-fill"></i></button>
+                            <button class="btn btn-primary"  @click="editAdmin(admin)"><i class="ri-edit-fill"></i></button>
+                            <button class="btn btn-primary"  @click="deleteAdmin(admin.id)"><i class="ri-delete-bin-6-fill"></i></button>
                         </div>
                     </div>
                 </div>

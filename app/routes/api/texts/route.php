@@ -48,5 +48,10 @@ return function (App $app) {
          * Endpoint para obtener un texto
          */
         $app->get('/getTextbyCategory/{id}', 'App\Controllers\api\TextsApiController:getTextbyCategory');
+
+        /**
+         * Endpoint para obtener un texto
+         */
+        $app->get('/getTextbyProduct/{id}', 'App\Controllers\api\TextsApiController:getTextbyProduct');
     });
 };

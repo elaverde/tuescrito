@@ -36,6 +36,8 @@ class CreateTableShopping extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->float('price');  
+            $table->boolean('view');
+            $table->boolean('send');
             // Required for Eloquent's created_at and updated_at columns
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

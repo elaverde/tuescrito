@@ -31,5 +31,18 @@ return function (App $app) {
          * Endpoint para obtener todas las compras
          */
         $app->get('/shoppings', 'App\Controllers\api\ShoppingApiController:index');
+        /**
+         * Endpoint para guardar las visualisacion de la notificacion
+         */
+        $app->post('/shoppings/notifications', 'App\Controllers\api\ShoppingApiController:storeNotification');
+        /**
+         * Endpoint para obtener el resumen de una compra
+         */
+        $app->get('/shoppings/resumen', 'App\Controllers\api\ShoppingApiController:getSalesNotification');
+
+        /**
+         * Endpoint para obtener compras sin despacho
+         */
+        $app->get('/shoppings/nodispatch', 'App\Controllers\api\ShoppingApiController:getSalesNotDispatch');
     });
 };

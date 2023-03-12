@@ -42,11 +42,14 @@ return function (App $app) {
         $app->get('/buys','\App\Controllers\web\SearchWebController:getBuys');
         
         $app->get('/profile', function ($request, $response, $args) use($blade) {
+            
             echo $blade->render('pages.user.app-profile',[
                 'path'=>"profile",
                 'name' => $_SESSION['user_name'],
                 'last_name' =>  $_SESSION['user_last_name'],
-                'email' =>  $_SESSION['user_email']
+                'email' =>  $_SESSION['user_email'],
+                'phone' =>  $_SESSION['user_phone'],
+                'country_code' =>  $_SESSION['user_country_code'],
             ]);
         });
         $app->get('/logout', function ($request, $response, $args) use($blade) {

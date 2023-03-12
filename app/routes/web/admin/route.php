@@ -28,6 +28,9 @@ return function (App $app) {
         $app->get('/text', function ($request, $response, $args) use($blade) {
             echo $blade->render('pages.admin.app-text',['path'=>"admin"]);
         });
+        $app->get('/sales', function ($request, $response, $args) use($blade) {
+            echo $blade->render('pages.admin.app-sales',['path'=>"sales"]);
+        });
         $app->get('/profile', function ($request, $response, $args) use($blade) {
             echo $blade->render('pages.admin.app-profile',[
                 'path'=>"admin",

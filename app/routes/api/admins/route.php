@@ -34,7 +34,7 @@ return function (App $app) {
          * - email: Correo electrónico del administrador (requerido)
          * - password: Contraseña del administrador (requerido)
          */
-        $app->post('/admin', \App\Controllers\api\AdminController::class . ':store');
+        $app->post('/admin', \App\Controllers\api\AdminApiController::class . ':store');
         /**
          * Endpoint para actualizar un administrador administrador
          *
@@ -44,7 +44,7 @@ return function (App $app) {
          * - email: Correo electrónico del administrador (requerido)
          * - password: Contraseña del administrador (requerido)
          */
-        $app->put('/admin/{id}', \App\Controllers\api\AdminController::class . ':update');
+        $app->put('/admin/{id}', \App\Controllers\api\AdminApiController::class . ':update');
         /**
          * Endpoint para actualizar la contraseña de un administrador administrador
          *
@@ -52,18 +52,18 @@ return function (App $app) {
          * - password: Contraseña del administrador (requerido)
          */
         
-        $app->put('/admin/{id}/password', \App\Controllers\api\AdminController::class . ':updatePassword');
+        $app->put('/admin/{id}/password', \App\Controllers\api\AdminApiController::class . ':updatePassword');
         /**
          * Endpoint para eliminar usuario
          * 
          * Datos esperados:
          * - id: id del usuario (requerido)
          */
-        $app->delete('/admin/{id}', \App\Controllers\api\AdminController::class . ':delete');
+        $app->delete('/admin/{id}', \App\Controllers\api\AdminApiController::class . ':delete');
         /**
          * Endpoint para listar los administradores
          */
-        $app->get('/admins', \App\Controllers\api\AdminController::class . ':index');
+        $app->get('/admins', \App\Controllers\api\AdminApiController::class . ':index');
         /**
          * Endpoint para actualizar la información del administrador logueado
          * 
@@ -72,23 +72,23 @@ return function (App $app) {
          * - last_name: Apellido del administrador (requerido)
          * - email: Correo electrónico del administrador (requerido)
          */
-        $app->put('/profile/admin/info', \App\Controllers\api\AdminController::class . ':updateInfo');
+        $app->put('/profile/admin/info', \App\Controllers\api\AdminApiController::class . ':updateInfo');
         /**
          * Endpoint para actualizar la contraseña del administrador logueado
          * 
          * Datos esperados:
          * - password: Contraseña del administrador (requerido)
          */
-        $app->put('/profile/admin/password', \App\Controllers\api\AdminController::class . ':updatePasswordInfo');
+        $app->put('/profile/admin/password', \App\Controllers\api\AdminApiController::class . ':updatePasswordInfo');
         /**
          * Endpoint para actualizar la foto del administrador logueado
          * 
          * Datos esperados:
          * - photo: Foto del administrador (requerido)
          */
-        $app->post('/profile/admin/photo', \App\Controllers\api\AdminController::class . ':updatePhotoInfo');
+        $app->post('/profile/admin/photo', \App\Controllers\api\AdminApiController::class . ':updatePhotoInfo');
 
-        $app->get('/info', \App\Controllers\api\AdminController::class . ':info');
+        $app->get('/info', \App\Controllers\api\AdminApiController::class . ':info');
     });
 
 };

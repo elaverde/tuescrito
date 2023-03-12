@@ -3,29 +3,34 @@
     $menuItems = [
         [
             'url' => './category',
-            'icon' => 'bi bi-card-list',
+            'icon' => 'bi bi-bookmark-fill',
             'label' => 'Categorias'
         ],
         [
             'url' => './product',
-            'icon' => 'bi bi-card-list',
+            'icon' => 'bi bi-basket3-fill',
             'label' => 'Productos'
         ],
         [
             'url' => './text',
-            'icon' => 'bi bi-card-list',
+            'icon' => 'bi bi-chat-right-text-fill',
             'label' => 'Textos'
         ],
         [
             'url' => './client',
-            'icon' => 'bi bi-card-list',
+            'icon' => 'bi bi-people-fill',
             'label' => 'Clientes'
         ],
         [
             'url' => './admin',
-            'icon' => 'bi bi-card-list',
+            'icon' => 'bi bi-person-fill-gear',
             'label' => 'Administradores'
         ],
+        [
+            'url' => './sales',
+            'icon' => 'bi bi-cart-check-fill',
+            'label' => 'Ventas'
+        ]
     ];
 @endphp
 <aside id="sidebar" class="sidebar">

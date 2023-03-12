@@ -30,6 +30,8 @@ class UserApiController
             'name' =>       $data['name'],
             'last_name' =>  $data['last_name'],
             'email' =>      $data['email'],
+            'phone' =>      $data['phone'],
+            'country_code' =>$data['country_code'],
             'password' =>   $password,
             'updated_at' => date('Y-m-d H:i:s'),
             'created_at' => date('Y-m-d H:i:s'),
@@ -80,6 +82,8 @@ class UserApiController
             'name' =>       $data['name'],
             'last_name' =>  $data['last_name'],
             'email' =>      $data['email'],
+            'phone' =>      $data['phone'],
+            'country_code' =>      $data['country_code'],
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
         return $response->withJson($user, 200);
@@ -166,11 +170,15 @@ class UserApiController
             'name' => $data['name'],
             'last_name' => $data['last_name'],
             'email' => $data['email'],
+            'phone' =>      $data['phone'],
+            'country_code' =>      $data['country_code'],
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
         $_SESSION['user_name'] = $data['name'];
         $_SESSION['user_last_name'] = $data['last_name'];
         $_SESSION['user_email'] =  $data['email'];
+        $_SESSION['user_phone'] =  $data['phone'];
+        $_SESSION['user_country_code'] =  $data['country_code'];
         return $response->withJson($data, 200);
     }
     public function updatePhotoInfo (Request $request, Response $response, $args)

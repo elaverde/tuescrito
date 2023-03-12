@@ -26,21 +26,27 @@ Perfil
                     <!-- General Form Elements -->
                     <form @submit.prevent="updateAdmin" @keyup.enter="submitForm">
                         <div class="row mb-3">
-                            <label for="inputText" class="col-sm-4 col-form-label">Nombres</label>
+                            <label for="name" class="col-sm-4 col-form-label">Nombres</label>
                             <div class="col-sm-8">
                                 <input required placeholder="Nombre" v-model='name' id="name" name="name" value="{{$name}}" type="text" class="form-control">
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="inputText" class="col-sm-4 col-form-label">Apellidos</label>
+                            <label for="last_name" class="col-sm-4 col-form-label">Apellidos</label>
                             <div class="col-sm-8">
                                 <input required placeholder="Apellidos" v-model='last_name' id="last_name" name="last_name"  value="{{$last_name}}" type="text" class="form-control">
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="inputText" class="col-sm-4 col-form-label">Email</label>
+                            <label for="email" class="col-sm-4 col-form-label">Email</label>
                             <div class="col-sm-8">
                                 <input required placeholder="Email" v-model='email' id="email" name="email" value="{{$email}}" type="email" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="phone" class="col-sm-4 col-form-label">Teléfono</label>
+                            <div class="col-sm-8">
+                                <input placeholder="Teléfono" required  type="text" name="phone" data-value="{{$phone}}" value="+{{$country_code}}{{$phone}}" class="form-control" id="phone">
                             </div>
                         </div>
                         <div class="row mb-3">

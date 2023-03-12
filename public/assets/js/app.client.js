@@ -14,7 +14,12 @@ var app = new Vue({
         loadingSpinner: false,
         
     },
-   
+    mounted: function () {
+        this.phone = document.querySelector("#phone");
+        this.iti = intlTelInput(this.phone, {
+            initialCountry: "co"
+        });
+    },
     created: function () {
         this.getClients();
     },
@@ -22,11 +27,15 @@ var app = new Vue({
        paginator
     },
     methods: {
+        getCountryCode: function() {
+            return this.iti.getSelectedCountryData().dialCode;
+        },
         clearInputs: function () {
             this.name = '';
             this.last_name = '';
             this.email = '';
             this.password = '';
+            this.phone.value = '';
             this.getClients();
             this.isEditing = false;
             //validamos el input photo que exista si existe lo limpiamos
@@ -41,6 +50,8 @@ var app = new Vue({
             this.last_name = data.last_name;
             this.email = data.email;
             this.password = data.password;
+            this.iti.setNumber("+"+data.country_code+data.phone);
+            this.iti.setNumber(data.phone);
         },
         submitForm: function () {
             this.isEditing ? this.updateClient() : this.storeClient();
@@ -54,6 +65,8 @@ var app = new Vue({
             data.append('last_name', this.last_name);
             data.append('email', this.email);
             data.append('password', this.password);
+            data.append('country_code', this.getCountryCode());
+            data.append('phone', this.phone.value);
 
             const photoInput = document.querySelector('input[name="photo"]');
 
@@ -82,7 +95,9 @@ var app = new Vue({
             axios.put(`${PATH_APP}/user/${this.id}`, {
                 name: this.name,
                 last_name: this.last_name,
-                email: this.email
+                email: this.email,
+                country_code: this.getCountryCode(),
+                phone: this.phone.value
             })
             .then(response => {
                 this.loadingIndicator = false;

@@ -1,0 +1,19 @@
+.carousel-control-prev,
+.carousel-control-next {
+  background-color: black;
+  width: 30px;
+  height: 30px;
+  border-radius: 30%;
+  margin-top: calc(100px - 15px);
+ 
+}
+.carousel-item{
+    text-align: center;
+    
+}
+.carousel-item > div{
+    min-height: 200px;
+}
+.iti {
+  width: 100% !important;
+}

@@ -17,6 +17,7 @@
   <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.css') }}?v={{ uniqid() }}" rel="stylesheet">
   <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
   <link href="{{ asset('assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/vendor/intl-tel-input/build/css/intlTelInput.css') }}" rel="stylesheet">
   <!-- Template Main CSS File -->
   <link href="{{ asset('assets/css/style.css?') }}v={{ uniqid() }}" rel="stylesheet">
   <link href="{{ asset('assets/css/app.css?') }}v={{ uniqid() }}" rel="stylesheet">
@@ -32,6 +33,8 @@
     <script src="{{ asset('assets/vendor/vue/vue.js') }}"></script>
     <script src="{{ asset('assets/vendor/sweetalert2/sweetalert2.js') }}"></script>
     <script src="{{ asset('assets/vendor/axios/axios.js') }}"></script>
+    <script src="{{ asset('assets/vendor/intl-tel-input/build/js/intlTelInput.min.js') }}"></script>
+    
     <!-- Template Main JS File -->
     <script src="{{ asset('assets/js/helpers.js') }}?v={{ uniqid() }}"></script>
     <script src="{{ asset('assets/js/main.js') }}?v={{ uniqid() }}"></script>

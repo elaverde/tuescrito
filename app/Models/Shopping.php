@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 class Shopping extends Model
 {
     protected $table = 'shopping';
-    protected $fillable = ['id','user_id','price','updated_at','created_at'];
+    protected $fillable = ['id','user_id','price','view','send','updated_at','created_at'];
     // Definir la relación "hasManyThrough" con el modelo Product
     public function products() {
         return $this->hasManyThrough(Product::class, PurchaseDetails::class);
@@ -16,4 +16,9 @@ class Shopping extends Model
     public function purchaseDetails() {
         return $this->hasMany(PurchaseDetails::class);
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    
 }

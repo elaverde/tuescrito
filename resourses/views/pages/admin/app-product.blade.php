@@ -65,8 +65,8 @@ Productos
                         <p>@{{product.description}}</p>
                         <!--ubicamos los bones al lado derecho -->
                         <div class="float-end">
-                            <button  @click="editProduct(product)"><i class="ri-edit-fill"></i></button>
-                            <button  @click="deleteProduct(product.id)"><i class="ri-delete-bin-6-fill"></i></button>
+                            <button class="btn btn-primary"  @click="editProduct(product)"><i class="ri-edit-fill"></i></button>
+                            <button class="btn btn-primary"  @click="deleteProduct(product.id)"><i class="ri-delete-bin-6-fill"></i></button>
                         </div>
                     </div>
                 </div>

@@ -23,7 +23,8 @@
   <link href="{{ asset('assets/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
   <link href="{{ asset('assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
   <link href="{{ asset('assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
-
+  <link href="{{ asset('assets/vendor/intl-tel-input/build/css/intlTelInput.css') }}" rel="stylesheet">
+    
   <!-- Template Main CSS File -->
   <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
   <link href="{{ asset('assets/css/app.css?') }}v={{ uniqid() }}" rel="stylesheet">
@@ -57,17 +58,18 @@
     </script>
     <script src="{{ asset('assets/vendor/apexcharts/apexcharts.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/chart.js/chart.umd.js') }}"></script>
-    <script src="{{ asset('assets/vendor/echarts/echarts.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/quill/quill.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/simple-datatables/simple-datatables.js') }}"></script>
     <script src="{{ asset('assets/vendor/php-email-form/validate.js') }}"></script>
     <script src="{{ asset('assets/vendor/vue/vue.js') }}"></script>
     <script src="{{ asset('assets/vendor/sweetalert2/sweetalert2.js') }}"></script>
     <script src="{{ asset('assets/vendor/axios/axios.js') }}"></script>
+    <script src="{{ asset('assets/vendor/intl-tel-input/build/js/intlTelInput.min.js') }}"></script>
+    
     <!-- Template Main JS File -->
+    
     <script src="{{ asset('assets/js/helpers.js') }}?v={{ uniqid() }}"></script>
     <script src="{{ asset('assets/js/main.js') }}?v={{ uniqid() }}"></script>
+    <script src="{{ asset('assets/js/app.header.js') }}?v={{ uniqid() }}"></script>
     
     @yield('scripts')
 </body>

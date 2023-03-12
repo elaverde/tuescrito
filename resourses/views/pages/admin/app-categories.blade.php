@@ -50,8 +50,8 @@ Categorias
                         <p>@{{category.description}}</p>
                         <!--ubicamos los bones al lado derecho -->
                         <div class="float-end">
-                            <button  @click="editCategory(category)"><i class="ri-edit-fill"></i></button>
-                            <button  @click="deleteCategory(category.id)"><i class="ri-delete-bin-6-fill"></i></button>
+                            <button class="btn btn-primary"  @click="editCategory(category)"><i class="ri-edit-fill"></i></button>
+                            <button class="btn btn-primary"  @click="deleteCategory(category.id)"><i class="ri-delete-bin-6-fill"></i></button>
                         </div>
                     </div>
                 </div>

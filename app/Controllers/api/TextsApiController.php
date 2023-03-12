@@ -145,6 +145,19 @@ class TextsApiController{
             'texts' => $texts
         ], 200);
     }
+    public function getTextbyProduct(Request $request, Response $response, $args)
+    {
+        $productId = $args['id'];
+        //traemos los textos y los parameters
+        $texts = Texts::where('product_id', $productId)
+            ->with('parameters')
+            ->get();
+        return $response->withJson([
+            'texts' => $texts->map(function ($text) {
+                return $text;
+            }),
+        ], 200);
+    }
     public function getTextbyCategory(Request $request, Response $response, $args)
     {
         $categoryId = $args['id'];

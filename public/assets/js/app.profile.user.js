@@ -12,15 +12,29 @@ var app = new Vue({
         isEditing: false
 
     },
+    mounted: function () {
+        this.phone = document.querySelector("#phone");
+        this.iti = intlTelInput(this.phone, {
+            initialCountry: "co"
+        });
+        const phoneInput = document.querySelector("#phone");
+        this.phone.value = this.phone.dataset.value;
+    },
     created: function () {
     },
     methods: {
+        getCountryCode: function() {
+            return this.iti.getSelectedCountryData().dialCode;
+        },
         updateAdmin: function () {
             this.loadingIndicator = true;
             axios.put(`${PATH_APP}/profile/user/info`, {
                 name: this.name,
                 last_name: this.last_name,
-                email: this.email
+                email: this.email,
+                phone: this.phone.value,
+                country_code: this.getCountryCode(),
+
             })
             .then(response => {
                 this.loadingIndicator = false;

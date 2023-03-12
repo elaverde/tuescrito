@@ -1,3 +1,11 @@
+window.onload = function () {
+    console.log("Vue.js is running...10");
+    
+    
+  
+ 
+}
+
 var app = new Vue({
     el: '#app',
     data: {
@@ -6,22 +14,36 @@ var app = new Vue({
         showFormLogin: true,
         name:'',
         last_name:'',
+        phone:'',
+        iti:'',
         email:'',
         password:'',
         loadingIndicator: false
     },
+    mounted: function () {
+        this.phone = document.querySelector("#phone");
+        this.iti = intlTelInput(this.phone, {
+            initialCountry: "co"
+        });
+    },
     created: function () {
+   
     },
     methods: {
         toogleForm: function () {
             this.showFormRecovery = !this.showFormRecovery;
             this.showFormLogin = !this.showFormLogin;
         },
+        getCountryCode: function() {
+            return this.iti.getSelectedCountryData().dialCode;
+        },
         clearInputs: function () {
             this.name = '';
             this.last_name = '';
             this.email = '';
             this.password = '';
+            this.phone.value = '';
+
         },
         login: function () {
             let _this = this;
@@ -82,7 +104,9 @@ var app = new Vue({
                 name: this.name,
                 last_name: this.last_name,
                 email: this.email,
-                password: this.password
+                password: this.password,
+                country_code: this.getCountryCode(),
+                phone: this.phone.value,
             })
             .then(response => {
                 _this.loadingIndicator = false;

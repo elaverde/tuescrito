@@ -88,14 +88,14 @@ Plantillas
                                 <!--ubicamos los bones al lado derecho -->
                                 <div class="float-end">
                                     <a target="_blank" :href="'./textsToPdf/'+text.id">
-                                        <button  @click="editText(text)">
+                                        <button class="btn btn-primary"  @click="editText(text)">
                                             <i class="ri-file-list-2-fill"></i>
                                         </button>
                                     </a>
-                                    <button  @click="editText(text)">
+                                    <button class="btn btn-primary"  @click="editText(text)">
                                         <i class="ri-edit-fill"></i>
                                     </button>
-                                    <button  @click="deleteText(text.id)">
+                                    <button class="btn btn-primary"  @click="deleteText(text.id)">
                                         <i class="ri-delete-bin-6-fill"></i>
                                     </button>
                                 </div>

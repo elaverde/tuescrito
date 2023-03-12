@@ -39,6 +39,8 @@ class CreateTableUsers extends Migration
             $table->string('email',50)->unique();
             $table->string('password');
             $table->string('photo');
+            $table->string('country_code');
+            $table->string('phone');
             // Required for Eloquent's created_at and updated_at columns
             $table->timestamps();
         });
@@ -49,6 +51,8 @@ class CreateTableUsers extends Migration
             'email' => 'user',
             'password' => $password,
             'photo' => 'none',
+            'phone' => '3124408995',
+            'country_code' => '+57',
             'updated_at' => date('Y-m-d H:i:s'),
             'created_at' => date('Y-m-d H:i:s'),
         ]);

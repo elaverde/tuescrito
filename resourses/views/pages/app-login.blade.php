@@ -15,7 +15,9 @@
     <!-- Vendor CSS Files -->
     <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.css?')}}v={{ uniqid() }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/intl-tel-input/build/css/intlTelInput.css') }}" rel="stylesheet">
     <!-- Template Main CSS File -->
+    <link href="{{ asset('assets/css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
 </head>
 <body style="background-image: url(https://img.freepik.com/vector-gratis/fondo-abstracto-morado-poligonal_1035-9882.jpg?w=2000);">
@@ -83,7 +85,7 @@
                                     </div>
                                     @if ($LOGIN=='user') 
                                     <!--regitros clientes-->
-                                    <div v-if="!loginView">
+                                    <div v-show="!loginView">
                                         <div class="d-flex justify-content-center py-2">
                                             <p class="text-center small">¡Regístrate en nuestra línea de servicios hoy mismo!</p>
                                         </div>
@@ -101,6 +103,12 @@
                                                 <div class="input-group has-validation">
                                                     <span class="input-group-text">@</span>
                                                     <input placeholder="user@tuescrito.com" required v-model="email" type="text" name="email" class="form-control" id="username">
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <label for="phone" class="form-label">Teléfono</label>
+                                                <div class="form-control border-0 p-0">
+                                                    <input placeholder="Tu teléfono" required  type="number" name="phone" class="form-control" id="phone">
                                                 </div>
                                             </div>
                                             <div class="col-12">
@@ -136,6 +144,7 @@
     <script src="{{ asset('assets/vendor/vue/vue.js') }}"></script>
     <script src="{{ asset('assets/vendor/sweetalert2/sweetalert2.js') }}"></script>
     <script src="{{ asset('assets/vendor/axios/axios.js') }}"></script>
+    <script src="{{ asset('assets/vendor/intl-tel-input/build/js/intlTelInput.min.js') }}"></script>
     <script src="{{ asset('assets/js/helpers.js') }}?v={{ uniqid() }}"></script>
     <!-- Template Main JS File -->
     @if ($LOGIN=='user') 

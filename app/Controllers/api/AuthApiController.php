@@ -25,6 +25,8 @@ class AuthApiController
         $_SESSION['user_last_name'] = $user->last_name;
         $_SESSION['user_email'] = $user->email;
         $_SESSION['user_photo'] = $user->photo;
+        $_SESSION['user_phone'] = $user->phone;
+        $_SESSION['user_country_code'] = $user->country_code;
         $_SESSION['user_role'] = "user";
         $_SESSION['updated_at'] = $user->updated_at;
         return $response->withJson(['success' => 'Login successful']);
